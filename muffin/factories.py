@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 import logging
 from flask import Flask
 from werkzeug.contrib.profiler import ProfilerMiddleware

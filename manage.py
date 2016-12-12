@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 import flask_script
 
 import muffin.factories

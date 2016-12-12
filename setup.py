@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 from setuptools import setup
 import muffin
 

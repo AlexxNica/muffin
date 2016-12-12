@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 import flask
 
 muffin_error = flask.Blueprint('muffin_error', __name__)
