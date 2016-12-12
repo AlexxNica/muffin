@@ -1,12 +1,16 @@
 language: python
 python:
   - "3.5"
-install: "pip install -r requirements.txt"
+install:
+-  pip install -r requirements.txt
+-  npm install -g bootprint
+-  npm install -g bootprint-swagger
 
 script:
 -  pylint muffin
 -  pep8
 -  py.test
+-  npm run gen_docs
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
