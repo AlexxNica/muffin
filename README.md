@@ -31,3 +31,17 @@ in the root directory to run all the tests.
 - Update the changelog
 - All new functionality must have unit tests
 - Unit tests coverage must be 100% at all times. Exclude things that should not be part of coverage statistics.
+
+# API Spec
+
+Follow the guidelines specified here:
+http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
+
+- Each endpoint should be clearly documented in which fields it supports filtering on, 
+pass the query to filter as a json object in the filter argument.
+- Each endpoint should support selecting which fields to return using a 
+comma separated fields attribute
+- Never return naked arrays as the top level object, return the pluralized form of 
+the resource you are working on.
+- Patch endpoints accept json patch objects or return 403 if run on a 
+field / the operation is not allowed
