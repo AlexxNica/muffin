@@ -2,74 +2,155 @@ swagger: '2.0'
 info:
   title: Muffin API
   description: API for working with test results stored in Muffin
-  version: "1.0.0"
+  version: "0.1.0"
 host: muffin.frosting.com
 schemes:
   - https
+# we use api v2 because the old frosting api reserved the v1 api
 basePath: /api/v2
 produces:
   - application/json
 paths:
-  /products:
+  /testsuiteruns:
     get:
-      summary: Product Types
+      summary: Test Suite Runs
       description: |
-        The Products endpoint returns information about the *Uber* products
-        offered at a given location. The response includes the display name
-        and other details about each product, and lists the products in the
-        proper display order.
-      parameters:
-        - name: latitude
-          in: query
-          description: Latitude component of location.
-          required: true
-          type: number
-          format: double
-        - name: longitude
-          in: query
-          description: Longitude component of location.
-          required: true
-          type: number
-          format: double
+        Test contains information on runs of a test suite.
       tags:
-        - Products
+        - Test Suite Run
       responses:
         200:
-          description: An array of products
+          description: An array of test suite runs
           schema:
             type: array
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/TestSuiteRun"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json:: {
+            "id": 5,
+            "idStr": "5",
+            "createdDate": "2015-02-25T16:14:37.377",
+            "startTime": "2015-02-25T16:14:38.427",
+            "state": "Running",
+            "metadata" : {
+              "buildVersionId": "1415782"
+            }
+          }
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
+
+  /testsuiteruns/{id}/testsuite:
+    get:
+      summary: Test Suite
+      description: |
+        Information about the test suite associated with the run of id
+      tags:
+        - Test Suite
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+
+      responses:
+        200:
+          description: An array of test suite runs
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/TestSuiteRun"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json:: {
+            "id": 5,
+            "idStr": "5",
+            "createdDate": "2015-02-25T16:14:37.377",
+            "startTime": "2015-02-25T16:14:38.427",
+            "state": "Running",
+            "metadata" : {
+              "buildVersionId": "1415782"
+            }
+          }
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
-  Product:
+  TestSuiteRun:
     type: object
+    required:
+    - id
+    - idStr
+    - createdDate
+    - state
+    - metadata
     properties:
-      product_id:
+      id:
+        type: integer
+        format: int64
+        description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
+      idStr:
         type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-      description:
+        description: Unique id of this particular test suite as a string use this if you have a sucky parser
+      createdDate:
         type: string
-        description: Description of product.
-      display_name:
+        format: datetime
+        description: The time when this run was initially registered with Muffin.
+      startTime:
         type: string
-        description: Display name of product.
-      capacity:
+        format: datetime
+        description: The time when this run transitioned into the Running state.
+      endTime:
         type: string
-        description: Capacity of product. For example, 4 people.
-      image:
+        format: datetime
+        description: The time when this run transitioned into the Finished state.
+      state:
+        $ref: "#/definitions/State"
+      result:
         type: string
-        description: Image URL representing the product.
+        description: The result of the test suite as set when transitioning into the Finished state
+      metadata:
+        type: object
+        description: The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+
   Error:
+    description: The response returned when a error happens
     type: object
+    required:
+    - statusCode
+    - error
     properties:
-      code:
+      statusCode:
         type: integer
         format: int32
-      message:
+        description: The HTTP status code of the error (also returned in the response)
+      error:
         type: string
+        description: Error message of what went wrong
       fields:
         type: string
+        description: The fields that errored. Not always populated.
+      stackTrace:
+        type: string
+        description: A stacktrace of what happened on the server when this error occured. Not always populated.
+  State:
+    description: The state of this object in Muffin
+    type: string
+    default: Pending
+    enum:
+    - Pending
+    - Running
+    - Finished
