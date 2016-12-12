@@ -3,7 +3,7 @@
 import pytest
 from muffin.factories import create_app
 
-import muffin.backend as backend
+import muffin.backend as backend  # pylint: disable=unused-import
 
 
 @pytest.fixture()
@@ -23,5 +23,5 @@ def app(request):
 
 
 @pytest.fixture()
-def db(request):
+def db(request):  # pylint: disable=unused-argument
     pass
