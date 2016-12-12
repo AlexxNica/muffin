@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 import flask
 
 hello_blueprint = flask.Blueprint("hello", __name__)

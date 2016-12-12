@@ -1,3 +1,5 @@
+# Copyright (C) Electronic Arts Inc.  All rights reserved.
+
 import time
 import random
 from flask_script import Command
