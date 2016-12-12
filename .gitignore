@@ -85,6 +85,9 @@ ENV/
 # PyCharm
 .idea
 
+# Node.js
+node_modules
+
 # Spyder project settings
 .spyderproject
 
