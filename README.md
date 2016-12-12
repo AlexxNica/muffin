@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/patissiere/muffin.svg?branch=master)](https://travis-ci.org/patissiere/muffin)
 [![Code Health](https://landscape.io/github/patissiere/muffin/master/landscape.svg?style=flat)](https://landscape.io/github/patissiere/muffin/master)
 [![codecov](https://codecov.io/gh/patissiere/muffin/branch/master/graph/badge.svg)](https://codecov.io/gh/patissiere/muffin)
+[![docs](https://img.shields.io/badge/docs-Read-blue.svg)](https://patissiere.github.io/muffin/)
 
 
 # Muffin
