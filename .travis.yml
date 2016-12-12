@@ -9,7 +9,7 @@ install:
 script:
 -  pylint muffin
 -  pep8
--  py.test
+-  py.test --cov=./
 -  npm run gen_docs
 
 after_success:
