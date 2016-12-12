@@ -3,14 +3,13 @@ python:
   - "3.5"
 install:
 -  pip install -r requirements.txt
--  npm install -g bootprint
--  npm install -g bootprint-swagger
+-  npm install
 
 script:
 -  pylint muffin
 -  pep8
 -  py.test --cov=./
--  npm run gen_docs
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run gen_docs && npm run upload_docs
