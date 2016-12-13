@@ -61,7 +61,9 @@ def handle_500(error):
     stack_trace = traceback.format_exc()
 
     response = flask.jsonify(
-        {"message": "an internal server error occurred.", "statusCode": 500, "stackTrace": stack_trace}
+        {"message": "an internal server error occurred.",
+         "statusCode": 500,
+         "stackTrace": stack_trace}
     )
     response.status_code = 500
 

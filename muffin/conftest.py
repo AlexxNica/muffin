@@ -1,7 +1,6 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import pytest
-import logging
 from muffin.factories import create_app
 
 import muffin.backend as be
