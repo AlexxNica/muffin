@@ -95,3 +95,4 @@ node_modules
 .ropeproject
 
 muffin.cfg
+muffin.db

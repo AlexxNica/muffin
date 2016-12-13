@@ -1,8 +1,7 @@
 {
-  "name": "Muffin",
+  "name": "Muffin Docs",
   "version": "0.1.0",
-  "description": "The Web UI for the Gluu Cluster REST API",
-  "main": "run.py",
+  "description": "Basic documentation generation and uploading for Muffin",
   "dependencies": {
     "bootprint": "^0.8",
     "bootprint-swagger": "^0.13",
