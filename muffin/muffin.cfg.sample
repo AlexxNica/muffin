@@ -1,2 +1,33 @@
 DEBUG = True
 #PROFILE = True
+
+# Databases for the application
+#
+# Examples:
+#
+# DATABASES = {
+#     "default": {"host": "localhost", "db": "db1"},
+#     "db1": {"host": "localhost", "db": "db2"},
+#     "db2": {"host": "localhost", "db": "db3"}
+# }
+#
+# or simply:
+#
+# DATABASES= {
+#     "default": {"host": "localhost", "db": "muffin"}
+# }
+#
+# If this value is not set, muffin will use a single sqlite database
+
+# Map shard ids to databases
+#
+# This is needed if you have more than one database and will
+# otherwise default to only use a single shard 0
+#
+# Example:
+SHARD_MAPPINGS = {
+    0: "default",
+    1: "db1",
+    2: "db2",
+}
+

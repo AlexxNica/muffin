@@ -4,12 +4,15 @@
   "description": "The Web UI for the Gluu Cluster REST API",
   "main": "run.py",
   "dependencies": {
-    "bootprint": "^0.8.5",
-    "bootprint-swagger": "^0.13.1"
+    "bootprint": "^0.8",
+    "bootprint-swagger": "^0.13",
+    "gh-pages": "^0.12",
+    "fs-extra": "^1.0"
   },
   "devDependencies": {   },
   "scripts": {
-    "gen_docs" : "bootprint swagger ./docs/api/swagger.yml ./docs/api "
+    "gen_docs": "node ./docs/gen.js",
+    "upload_docs": "node ./docs/upload.js"
   },
   "repository": {
     "type": "git",

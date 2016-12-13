@@ -63,7 +63,7 @@ instance/
 # Sphinx documentation
 docs/_build/
 
-# PyBuilder
+# Generated docs
 target/
 
 # IPython Notebook
