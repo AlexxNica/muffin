@@ -2,74 +2,488 @@ swagger: '2.0'
 info:
   title: Muffin API
   description: API for working with test results stored in Muffin
-  version: "1.0.0"
+  version: "0.1.0"
 host: muffin.frosting.com
 schemes:
   - https
+# we use api v2 because the old frosting api reserved the v1 api
 basePath: /api/v2
 produces:
   - application/json
 paths:
-  /products:
+  /testsuiteruns:
     get:
-      summary: Product Types
+      summary: Test Suite Runs
       description: |
-        The Products endpoint returns information about the *Uber* products
-        offered at a given location. The response includes the display name
-        and other details about each product, and lists the products in the
-        proper display order.
-      parameters:
-        - name: latitude
-          in: query
-          description: Latitude component of location.
-          required: true
-          type: number
-          format: double
-        - name: longitude
-          in: query
-          description: Longitude component of location.
-          required: true
-          type: number
-          format: double
+        Test contains information on runs of a test suite.
       tags:
-        - Products
+        - Test Suite Run
       responses:
         200:
-          description: An array of products
+          description: An array of test suite runs
           schema:
             type: array
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/TestSuiteRun"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: {
+              testsuites: [
+                {
+                  "id": 5,
+                  "idStr": "5",
+                  "createdAt": "2015-02-25T16:14:37.377",
+                  "startedAt": "2015-02-25T16:14:38.427",
+                  "state": "Running",
+                  "metadata" : {
+                    "buildVersionId": "1415782"
+                  }
+                }
+              ]
+            }
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
+    post:
+      summary: Test Suite Runs
+      description: |
+        Create a new test suite run
+      tags:
+        - Test Suite Run
+      parameters:
+      - name: request
+        in: body
+        required: true
+        schema:
+          description: A new test suite run, including the information about its test suite
+          type: object
+          required:
+          - name
+          - metadata
+          properties:
+            name:
+              type: string
+              description: The name of the test suite that was being run.
+            description:
+              type: string
+              description: The description of the test suite
+            tags:
+              type: array
+              description: The set of tags that indicates how to group this test suite
+              items:
+               $ref: "#/definitions/Tags"
+            result:
+              type: string
+              description: The result of the test suite if state was Finished, if this is specified the State is assumed to be Finished
+            startedAt:
+              type: string
+              format: datetime
+              description: The time when this run transitioned into Running. If not specified the server will use its the time of receiving this request. Only valid if result is specified.
+            endedAt:
+              type: string
+              format: datetime
+              description: The time when this run transitioned into the Finished state. Only valid if result is specified.
+            metadata:
+              type: object
+              description: The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+      responses:
+        200:
+          description: The test suite run
+          schema:
+            $ref: "#/definitions/NewObjectReference"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: {
+              "id" : 1,
+              "idStr" : "1"
+            }
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuiteruns/{id}:
+    patch:
+      summary: Test Suite Runs
+      description: |
+        Test contains information on runs of a test suite. Only metadata can be patched.
+      tags:
+        - Test Suite Run
+      parameters:
+      - name: id
+        in: path
+        description: The id of the test suite you want to find the test suite for
+        required: true
+        type: integer
+        format: int64
+      - name: request
+        in: body
+        description: "Allowed fields to update are:
+          metadata"
+        required: true
+        schema:
+         $ref: "#/definitions/JSONPatch"
+      responses:
+        200:
+          description: The modified object
+          schema:
+            $ref: "#/definitions/TestSuiteRun"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: [
+              { "op": "replace", "path": "/baz", "value": "boo" },
+              { "op": "add", "path": "/hello", "value": ["world"] },
+              { "op": "remove", "path": "/foo"}
+            ]
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+    delete:
+      summary: Test Suite Runs
+      description: |
+        Deletes a particular test suite run
+      tags:
+        - Test Suite Run
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: The test suite run was deleted
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuiteruns/{id}/start:
+    put:
+      summary: Test Suite Runs
+      description: Transition the indvidual run to a Running state
+      tags:
+        - Test Suite Run
+      parameters:
+      - name: id
+        in: path
+        description: The id of the test suite you want to transition
+        required: true
+        type: integer
+        format: int64
+      - name: request
+        in: body
+        description: Transition the run to Running
+        required: true
+        schema:
+          type: object
+          properties:
+            startedAt:
+              type: string
+              format: datetime
+              description: The time when this run transitioned into Running. If not specified the server will use its the time of receiving this request.
+      responses:
+        204:
+          description: The test suite run is now Running
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuiteruns/{id}/end:
+    put:
+      summary: Test Suite Runs
+      description: Transition the indvidual run to a Finished state
+      tags:
+        - Test Suite Run
+      parameters:
+      - name: id
+        in: path
+        description: The id of the test suite you want to transition
+        required: true
+        type: integer
+        format: int64
+      - name: request
+        in: body
+        description: Transition the run to Finshed
+        required: true
+        schema:
+          type: object
+          required:
+          - result
+          properties:
+            result:
+              type: string
+              description: The result of the test suite run.
+            endedAt:
+              type: string
+              format: datetime
+              description: The time when this run was finshed runnung. If not specified the server will use its the time of receiving this request.
+      responses:
+        204:
+          description: The test suite run is now Ended
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuite/{id}:
+    get:
+      summary: Test Suite
+      description: |
+        Information about the test suite associated with the run of id
+      tags:
+        - Test Suite
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: The general description of the test suite that was being run
+          schema:
+            $ref: "#/definitions/TestSuite"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: {
+                "id": 2,
+                "id_str": "2",
+                "name": "Frostbite Rendering (Mantle)",
+                "description": "Includes all tests from the frostbite rendering test suite asset.",
+                "tags": [
+                  "Mantle"
+                ],
+                "metadata" : {
+                  "data_set": "Example",
+                  "maintaner_name": "Albert Cervin",
+                  "maintainer_email": "albert.cervin@frostbite.com",
+                },
+                "references": [
+                {
+                  "url": "/testsuiteruns?suite=2",
+                  "rel": "runs"
+                }]
+            }
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+    delete:
+      summary: Test Suite
+      description: |
+        Delete the test suite and all runs that reference it
+      tags:
+        - Test Suite
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+
+      responses:
+        204:
+          description: The test suite run was deleted
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
-  Product:
+  TestSuiteRun:
     type: object
+    required:
+    - id
+    - idStr
+    - createdAt
+    - state
+    - metadata
+    - references
     properties:
-      product_id:
+      id:
+        type: integer
+        format: int64
+        description: Unique id of this run of a test suite as an integer, use this if your parser can handle 64 bit values
+      idStr:
         type: string
-        description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+        description: Unique id of this run of a test suite as a string use this if you have a sucky parser
+      createdAt:
+        type: string
+        format: datetime
+        description: The time when this run was initially registered with Muffin.
+      startedAt:
+        type: string
+        format: datetime
+        description: The time when this run transitioned into the Running state.
+      endedAt:
+        type: string
+        format: datetime
+        description: The time when this run transitioned into the Finished state.
+      state:
+        $ref: "#/definitions/State"
+      result:
+        type: string
+        description: The result of the test suite as set when transitioning into the Finished state
+      metadata:
+        type: object
+        description: The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+      references:
+        type: array
+        description: |
+          The related resources, possible relationships are:
+          - TestSuite
+        items:
+          $ref: "#/definitions/Reference"
+  TestSuite:
+    type: object
+    required:
+    - id
+    - idStr
+    - name
+    - description
+    - metadata
+    - references
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
+      idStr:
+        type: string
+        description: Unique id of this particular test suite as a string use this if you have a sucky parser
+      name:
+        type: string
+        description: The name of the test suite
       description:
         type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: Capacity of product. For example, 4 people.
-      image:
-        type: string
-        description: Image URL representing the product.
+        description: A longer description of that this test suite does
+      tags:
+        type: array
+        description: A set of tags that indicate that can be used to group test suites
+        items:
+          $ref: "#/definitions/Tags"
+      metadata:
+        type: object
+        description: The metadata of the Test Suite, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+      references:
+        type: array
+        description: |
+          The related resources, possible relationships are:
+          - Runs
+        items:
+          $ref: "#/definitions/Reference"
   Error:
+    description: The response returned when a error happens
     type: object
+    required:
+    - statusCode
+    - error
     properties:
-      code:
+      statusCode:
         type: integer
         format: int32
-      message:
+        description: The HTTP status code of the error (also returned in the response)
+      error:
         type: string
+        description: Error message of what went wrong
       fields:
+        type: string
+        description: The fields that errored. Not always populated.
+      stackTrace:
+        type: string
+        description: A stacktrace of what happened on the server when this error occured. Not always populated.
+  State:
+    description: The state of this object in Muffin
+    type: string
+    default: Pending
+    enum:
+    - Pending
+    - Running
+    - Finished
+  NewObjectReference:
+    description: A reference to the id of the newly created object
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
+      idStr:
+        type: string
+        description: Unique id of this particular test suite as a string use this if you have a sucky parser
+  Tags:
+    description: A string indicating a grouping
+    type: string
+  JSONPatch:
+    description: A json patch operation, as defined here http://jsonpatch.com/
+    type: object
+    required:
+    - path
+    - op
+    properties:
+      op:
+        type: string
+        enum:
+        - replace
+        - add
+        - remove
+        - copy
+        - move
+        - test
+      value:
+        type: string
+        description: The new value to replace with
+      path:
+        type: string
+        description: The path descripting which field to update (see the documentation on jsonpatch.com)
+      from:
+        type: string
+        description: The path to the field you wish to move
+  Reference:
+    description: A link to a resource
+    type: object
+    properties:
+      url:
+        description: The url to the linked resource
+        type: string
+      rel:
+        description: Name of the relationship this link models
         type: string
