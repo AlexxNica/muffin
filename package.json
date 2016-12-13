@@ -1,5 +1,5 @@
 {
-  "name": "Muffin Docs",
+  "name": "Muffin_Docs",
   "version": "0.1.0",
   "description": "Basic documentation generation and uploading for Muffin",
   "dependencies": {
