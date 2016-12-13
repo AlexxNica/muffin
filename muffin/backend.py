@@ -5,7 +5,7 @@ from muffin.database import db
 # import muffin.tables as tables
 
 
-shard_id_set = frozenset([0])  # TODO we will need one set for each project in the future
+shard_id_set = set([0])  # TODO we will need one set for each project in the future
 shard_map = {0: "default"}
 
 
@@ -62,6 +62,7 @@ def _init_db_bindigs(app):
         binds[k] = _get_cs_from_db_binding(v)
 
     shard_map.update(app.config.get('SHARD_MAPPINGS', shard_map))
+    shard_id_set.update(set(shard_map.keys()))
 
 
 def init_tables(drop_tables=False):
