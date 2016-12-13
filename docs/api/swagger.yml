@@ -31,7 +31,109 @@ paths:
               type: number
               format: double
           examples:
-            application/json:: {
+            application/json: {
+              testsuites: [
+                {
+                  "id": 5,
+                  "idStr": "5",
+                  "createdDate": "2015-02-25T16:14:37.377",
+                  "startTime": "2015-02-25T16:14:38.427",
+                  "state": "Running",
+                  "metadata" : {
+                    "buildVersionId": "1415782"
+                  }
+                }
+              ]
+            }
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      summary: Test Suite Runs
+      description: |
+        Create a new test suite run
+      tags:
+        - Test Suite Run
+      responses:
+        200:
+          description: The test suite run
+          schema:
+            type: object
+            required:
+            - state
+            - metadata
+            properties:
+              name:
+                type: string
+                description: The name of the test suite that was being run.
+              description:
+                type: string
+                description: The description of the test suite
+              tags:
+                type: array
+                description: The set of tags that indicates how to group this test suite
+                items:
+                 $ref: "#/definitions/Tags"
+              state:
+                $ref: "#/definitions/State"
+              result:
+                type: string
+                description: The result of the test suite if state was Finished
+              metadata:
+                type: object
+                description: The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: {
+              "id" : 1,
+              "idStr" : "1"
+            }
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuiteruns/{id}:
+    patch:
+      summary: Test Suite Runs
+      description: |
+        Test contains information on runs of a test suite.
+        Valid fields to patch are:
+         - state
+         - result
+         - metadata (add / remove operations are only valid on this object)
+      tags:
+        - Test Suite Run
+      parameters:
+      - name: id
+        in: path
+        description: The id of the test suite you want to find the test suite for
+        required: true
+        type: integer
+        format: int64
+      - name: suite
+        in: query
+        description: Returns only the runs of a particular test suite
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: The patch was applied
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/JSONPatch"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: {
             "id": 5,
             "idStr": "5",
             "createdDate": "2015-02-25T16:14:37.377",
@@ -39,14 +141,44 @@ paths:
             "state": "Running",
             "metadata" : {
               "buildVersionId": "1415782"
-            }
+            },
+            "references" : [
+              {
+                "url": "/testsuite/1",
+                "rel": "testsuite"
+              }
+            ]
           }
         default:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
-
-  /testsuiteruns/{id}/testsuite:
+    delete:
+      summary: Test Suite Runs
+      description: |
+        Deletes a particular test suite run
+      tags:
+        - Test Suite Run
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+      responses:
+        204:
+          description: The test suite run was deleted
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuite/{id}:
     get:
       summary: Test Suite
       description: |
@@ -63,27 +195,34 @@ paths:
 
       responses:
         200:
-          description: An array of test suite runs
+          description: The general description of the test suite that was being run
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/TestSuiteRun"
+            $ref: "#/definitions/TestSuite"
           headers:
             X-ElapsedTime:
               description: Number of milliseconds spent on the request
               type: number
               format: double
           examples:
-            application/json:: {
-            "id": 5,
-            "idStr": "5",
-            "createdDate": "2015-02-25T16:14:37.377",
-            "startTime": "2015-02-25T16:14:38.427",
-            "state": "Running",
-            "metadata" : {
-              "buildVersionId": "1415782"
+            application/json: {
+                "id": 2,
+                "id_str": "2",
+                "name": "Frostbite Rendering (Mantle)",
+                "description": "Includes all tests from the frostbite rendering test suite asset.",
+                "tags": [
+                  "Mantle"
+                ],
+                "metadata" : {
+                  "data_set": "Example",
+                  "maintaner_name": "Albert Cervin",
+                  "maintainer_email": "albert.cervin@frostbite.com",
+                },
+                "references": [
+                {
+                  "url": "/testsuiteruns?suite=2",
+                  "rel": "runs"
+                }]
             }
-          }
         default:
           description: Unexpected error
           schema:
@@ -97,14 +236,15 @@ definitions:
     - createdDate
     - state
     - metadata
+    - references
     properties:
       id:
         type: integer
         format: int64
-        description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
+        description: Unique id of this run of a test suite as an integer, use this if your parser can handle 64 bit values
       idStr:
         type: string
-        description: Unique id of this particular test suite as a string use this if you have a sucky parser
+        description: Unique id of this run of a test suite as a string use this if you have a sucky parser
       createdDate:
         type: string
         format: datetime
@@ -125,7 +265,51 @@ definitions:
       metadata:
         type: object
         description: The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
-
+      references:
+        type: array
+        description: |
+          The related resources, possible relationships are:
+          - TestSuite
+        items:
+          $ref: "#/definitions/Reference"
+  TestSuite:
+    type: object
+    required:
+    - id
+    - idStr
+    - name
+    - description
+    - metadata
+    - references
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
+      idStr:
+        type: string
+        description: Unique id of this particular test suite as a string use this if you have a sucky parser
+      name:
+        type: string
+        description: The name of the test suite
+      description:
+        type: string
+        description: A longer description of that this test suite does
+      tags:
+        type: array
+        description: A set of tags that indicate that can be used to group test suites
+        items:
+          $ref: "#/definitions/Tags"
+      metadata:
+        type: object
+        description: The metadata of the Test Suite, any patched values end up here. This is not versioned so you can never assume this contains particular fields.
+      references:
+        type: array
+        description: |
+          The related resources, possible relationships are:
+          - Runs
+        items:
+          $ref: "#/definitions/Reference"
   Error:
     description: The response returned when a error happens
     type: object
@@ -154,3 +338,41 @@ definitions:
     - Pending
     - Running
     - Finished
+  Tags:
+    description: A string indicating a grouping
+    type: string
+  JSONPatch:
+    description: A json patch operation, as defined here http://jsonpatch.com/
+    type: object
+    required:
+    - path
+    - op
+    properties:
+      op:
+        type: string
+        enum:
+        - replace
+        - add
+        - remove
+        - copy
+        - move
+        - test
+      value:
+        type: string
+        description: The new value to replace with
+      path:
+        type: string
+        description: The path descripting which field to update (see the documentation on jsonpatch.com)
+      from:
+        type: string
+        description: The path to the field you wish to move
+  Reference:
+    description: A link to a resource
+    type: object
+    properties:
+      url:
+        description: The url to the linked resource
+        type: string
+      rel:
+        description: Name of the relationship this link models
+        type: string
