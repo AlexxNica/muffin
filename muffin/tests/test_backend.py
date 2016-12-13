@@ -73,3 +73,12 @@ def test_empty_shard_config(app):
 
     with pytest.raises(backend.BackendException):
         backend.init_app(app)
+
+
+def test_id_mangling():
+    db_id = 322
+    shard_id = 12
+
+    entity_id = backend.build_entity_id(db_id, shard_id)
+    assert backend.get_db_id(entity_id) == db_id
+    assert backend.get_shard_id(entity_id) == shard_id
