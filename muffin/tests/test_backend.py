@@ -73,3 +73,9 @@ def test_empty_shard_config(app):
 
     with pytest.raises(backend.BackendException):
         backend.init_app(app)
+
+
+def test_backend_destroy(test_backend):
+    # Just doing a random operation until we actually use the backend fixture
+    del test_backend
+

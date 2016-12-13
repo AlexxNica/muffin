@@ -17,7 +17,7 @@ def create_app(config_file):
         app.logger.setLevel(logging.DEBUG)
 
     # set up wanted middleware
-    if app.config.get('PROFILE', False):
+    if app.config.get('PROFILE', False):  # pragma: no cover : we don't want to verify profile configs
         app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[10])
 
     # init backend

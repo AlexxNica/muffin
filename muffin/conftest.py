@@ -1,6 +1,7 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import pytest
+import logging
 from muffin.factories import create_app
 
 import muffin.backend as be
@@ -18,12 +19,13 @@ def app(request):
         ctx.pop()
 
     request.addfinalizer(finalize)
+    application.logger.disabled = True
 
     return application
 
 
 @pytest.fixture()
-def backend(app):  # pylint:disable=W0621
+def test_backend(app):  # pylint:disable=W0621
     be.init_app(app)
     be.init_tables(drop_tables=True)
     return be
