@@ -227,6 +227,32 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
+    delete:
+      summary: Test Suite
+      description: |
+        Delete the test suite and all runs that reference it
+      tags:
+        - Test Suite
+      parameters:
+        - name: id
+          in: path
+          description: The id of the test suite you want to find the test suite for
+          required: true
+          type: integer
+          format: int64
+
+      responses:
+        204:
+          description: The test suite run was deleted
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
   TestSuiteRun:
     type: object
