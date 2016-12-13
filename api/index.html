@@ -21,50 +21,92 @@
         https
     </div>
     
-        <h2 id="swagger--summary-no-tags">Summary</h2>
-        <table class="table table-bordered table-condensed swagger--summary">
-            <thead>
-            <tr>
-                <th>Path</th>
-                <th>Operation</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                            <td class="swagger--summary-path" rowspan="1">
-                                <a href="#path--products">/products</a>
-                            </td>
-                        <td>
-                            <a href="#operation--products-get">GET</a>
-                        </td>
-                        <td>
-                            <p>Product Types</p>
         
-                        </td>
+        <h2 id="swagger--summary-tags">Summary</h2>
+            <h3 id="tag-Test-Suite-Run" class="swagger-summary-tag">Tag: Test Suite Run</h3>
+            <p></p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>Operation</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns-get">GET /testsuiteruns</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
                     </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns-post">POST /testsuiteruns</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns--id--patch">PATCH /testsuiteruns/{id}</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns--id--delete">DELETE /testsuiteruns/{id}</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns--id--start-put">PUT /testsuiteruns/{id}/start</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--testsuiteruns--id--end-put">PUT /testsuiteruns/{id}/end</a></td>
+                        <td><p>Test Suite Runs</p>
+        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 id="tag-Test-Suite" class="swagger-summary-tag">Tag: Test Suite</h3>
+            <p></p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>Operation</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#operation--testsuite--id--get">GET /testsuite/{id}</a></td>
+                        <td><p>Test Suite</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--testsuite--id--delete">DELETE /testsuite/{id}</a></td>
+                        <td><p>Test Suite</p>
+        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
     
     
     
     <h2>Paths</h2>
     
         
-        <span id="path--products"></span>
-            <div id="operation--products-get" class="swagger--panel-operation-get panel">
+        <span id="path--testsuite--id-"></span>
+            <div id="operation--testsuite--id--delete" class="swagger--panel-operation-delete panel">
                 <div class="panel-heading">
-                    <div class="operation-summary">Product Types</div>
-                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/products</strong></h3>
+                    <div class="operation-summary">Test Suite</div>
+                    <h3 class="panel-title"><span class="operation-name">DELETE</span> <strong>/testsuite/{id}</strong></h3>
                         Tags:
-                            <a href="#tag-Products">Products</a>
+                            <a href="#tag-Test-Suite">Test Suite</a>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>The Products endpoint returns information about the <em>Uber</em> products
-            offered at a given location. The response includes the display name
-            and other details about each product, and lists the products in the
-            proper display order.</p>
+                        <p>Delete the test suite and all runs that reference it</p>
             
                     </section>
                     
@@ -82,11 +124,11 @@
                                 <tbody>
                                         <tr>
                                             <td>
-                                                latitude
-                                            <td><p>Latitude component of location.</p>
+                                                id
+                                            <td><p>The id of the test suite you want to find the test suite for</p>
                                         </td>
-                                            <td>query</td>
-                                            <td><span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
                                         <span class="json-property-range" title="Value limits"></span>
                                         
                                             </td>
@@ -94,13 +136,115 @@
                                                     <span class="json-property-required"></span>
                                             </td>
                                         </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-204">
+                                        204 No Content
+                                    
+                                    </dt>
+                                    <dd class="sw-response-204">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The test suite run was deleted</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    <div id="operation--testsuite--id--get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite</div>
+                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/testsuite/{id}</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite">Test Suite</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Information about the test suite associated with the run of id</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                         <tr>
                                             <td>
-                                                longitude
-                                            <td><p>Longitude component of location.</p>
+                                                id
+                                            <td><p>The id of the test suite you want to find the test suite for</p>
                                         </td>
-                                            <td>query</td>
-                                            <td><span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
                                         <span class="json-property-range" title="Value limits"></span>
                                         
                                             </td>
@@ -125,7 +269,60 @@
                                     <dd class="sw-response-200">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>An array of products</p>
+                                                    <p>The general description of the test suite that was being run</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-6 sw-response-examples">
+                                                        <div class="label label-default">Example for application/json</div>
+                                                        <pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">description</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;Includes all tests from the frostbite rendering test suite asset.&quot;</span></span>,<br>    &quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-number">2</span></span>,<br>    &quot;<span class="hljs-attribute">id_str</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;2&quot;</span></span>,<br>    &quot;<span class="hljs-attribute">metadata</span>&quot;: <span class="hljs-value">{<br>        &quot;<span class="hljs-attribute">data_set</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;Example&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">maintainer_email</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;albert.cervin@frostbite.com&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">maintaner_name</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;Albert Cervin&quot;</span><br>    </span>}</span>,<br>    &quot;<span class="hljs-attribute">name</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;Frostbite Rendering (Mantle)&quot;</span></span>,<br>    &quot;<span class="hljs-attribute">references</span>&quot;: <span class="hljs-value">[<br>        {<br>            &quot;<span class="hljs-attribute">rel</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;runs&quot;</span></span>,<br>            &quot;<span class="hljs-attribute">url</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;/testsuiteruns?suite=2&quot;</span><br>        </span>}<br>    ]</span>,<br>    &quot;<span class="hljs-attribute">tags</span>&quot;: <span class="hljs-value">[<br>        <span class="hljs-string">&quot;Mantle&quot;</span><br>    ]<br></span>}
+                                            </code></pre>
+                                            
+                                                    </div>
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/TestSuite">TestSuite</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
                                             
                                                 </div>
                                             </div>
@@ -134,9 +331,61 @@
                                                 <div class="col-md-6 sw-response-model">
                                                 <div  class="panel panel-definition">
                                                     <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--testsuiteruns"></span>
+            <div id="operation--testsuiteruns-get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">GET</span> <strong>/testsuiteruns</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Test contains information on runs of a test suite.</p>
+            
+                    </section>
+                    
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>An array of test suite runs</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-6 sw-response-examples">
+                                                        <div class="label label-default">Example for application/json</div>
+                                                        <pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">testsuites</span>&quot;: <span class="hljs-value">[<br>        {<br>            &quot;<span class="hljs-attribute">createdAt</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;2015-02-25T16:14:37.377&quot;</span></span>,<br>            &quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-number">5</span></span>,<br>            &quot;<span class="hljs-attribute">idStr</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;5&quot;</span></span>,<br>            &quot;<span class="hljs-attribute">metadata</span>&quot;: <span class="hljs-value">{<br>                &quot;<span class="hljs-attribute">buildVersionId</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;1415782&quot;</span><br>            </span>}</span>,<br>            &quot;<span class="hljs-attribute">startedAt</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;2015-02-25T16:14:38.427&quot;</span></span>,<br>            &quot;<span class="hljs-attribute">state</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;Running&quot;</span><br>        </span>}<br>    ]<br></span>}
+                                            </code></pre>
+                                            
+                                                    </div>
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
                                                             
                                                                             <section class="json-schema-array-items">
-                                                                                <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Product">Product</a>
+                                                                                <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/TestSuiteRun">TestSuiteRun</a>
                                                                                 </span>
                                                                                 <span class="json-property-range" title="Value limits"></span>
                                                                                 
@@ -146,6 +395,825 @@
                                                                             </section>    </div>
                                                 </div></div>
                                             
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    <div id="operation--testsuiteruns-post" class="swagger--panel-operation-post panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">POST</span> <strong>/testsuiteruns</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Create a new test suite run</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p></p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                            <section class="json-schema-description">
+                                                <p>A new test suite run, including the information about its test suite</p>
+                                        
+                                            </section>
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="name">
+                                                                <span class="json-property-name">name:</span>
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                    <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The name of the test suite that was being run.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="description">
+                                                                <span class="json-property-name">description:</span>
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The description of the test suite</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="tags">
+                                                                <span class="json-property-name">tags:</span>
+                                                                <span class="json-property-type">object[]</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The set of tags that indicates how to group this test suite</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                                    <section class="json-schema-array-items">
+                                                                                        <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Tags">Tags</a>
+                                                                                        </span>
+                                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                                        
+                                                                                        <div class="json-inner-schema">
+                                                                                            
+                                                                                        </div>
+                                                                                    </section>                </div>
+                                                            </dd>
+                                                            <dt data-property-name="result">
+                                                                <span class="json-property-name">result:</span>
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The result of the test suite if state was Finished, if this is specified the State is assumed to be Finished</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="startedAt">
+                                                                <span class="json-property-name">startedAt:</span>
+                                                                <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The time when this run transitioned into Running. If not specified the server will use its the time of receiving this request. Only valid if result is specified.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="endedAt">
+                                                                <span class="json-property-name">endedAt:</span>
+                                                                <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The time when this run transitioned into the Finished state. Only valid if result is specified.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="metadata">
+                                                                <span class="json-property-name">metadata:</span>
+                                                                <span class="json-property-type">object</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                    <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The test suite run</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-6 sw-response-examples">
+                                                        <div class="label label-default">Example for application/json</div>
+                                                        <pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">id</span>&quot;: <span class="hljs-value"><span class="hljs-number">1</span></span>,<br>    &quot;<span class="hljs-attribute">idStr</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;1&quot;</span><br></span>}
+                                            </code></pre>
+                                            
+                                                    </div>
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/NewObjectReference">NewObjectReference</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--testsuiteruns--id-"></span>
+            <div id="operation--testsuiteruns--id--delete" class="swagger--panel-operation-delete panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">DELETE</span> <strong>/testsuiteruns/{id}</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Deletes a particular test suite run</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            <td><p>The id of the test suite you want to find the test suite for</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-204">
+                                        204 No Content
+                                    
+                                    </dt>
+                                    <dd class="sw-response-204">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The test suite run was deleted</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    <div id="operation--testsuiteruns--id--patch" class="swagger--panel-operation-patch panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">PATCH</span> <strong>/testsuiteruns/{id}</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Test contains information on runs of a test suite. Only metadata can be patched.</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><p>Allowed fields to update are: metadata</p>
+                        </p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                            <a class="json-schema-ref" href="#/definitions/JSONPatch">JSONPatch</a>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            <td><p>The id of the test suite you want to find the test suite for</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The modified object</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-6 sw-response-examples">
+                                                        <div class="label label-default">Example for application/json</div>
+                                                        <pre><code class="lang-json">[<br>    {<br>        &quot;<span class="hljs-attribute">op</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;replace&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">path</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;/baz&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">value</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;boo&quot;</span><br>    </span>},<br>    {<br>        &quot;<span class="hljs-attribute">op</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;add&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">path</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;/hello&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">value</span>&quot;: <span class="hljs-value">[<br>            <span class="hljs-string">&quot;world&quot;</span><br>        ]<br>    </span>},<br>    {<br>        &quot;<span class="hljs-attribute">op</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;remove&quot;</span></span>,<br>        &quot;<span class="hljs-attribute">path</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;/foo&quot;</span><br>    </span>}<br>]
+                                            </code></pre>
+                                            
+                                                    </div>
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/TestSuiteRun">TestSuiteRun</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--testsuiteruns--id--end"></span>
+            <div id="operation--testsuiteruns--id--end-put" class="swagger--panel-operation-put panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">PUT</span> <strong>/testsuiteruns/{id}/end</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Transition the indvidual run to a Finished state</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><p>Transition the run to Finshed</p>
+                        </p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="result">
+                                                                <span class="json-property-name">result:</span>
+                                                                <span class="json-property-type">string</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                                    <span class="json-property-required"></span>
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The result of the test suite run.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                            <dt data-property-name="endedAt">
+                                                                <span class="json-property-name">endedAt:</span>
+                                                                <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The time when this run was finshed runnung. If not specified the server will use its the time of receiving this request.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            <td><p>The id of the test suite you want to transition</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-204">
+                                        204 No Content
+                                    
+                                    </dt>
+                                    <dd class="sw-response-204">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The test suite run is now Ended</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
+                                            </div>                </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Error">Error</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>                </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>    
+        <span id="path--testsuiteruns--id--start"></span>
+            <div id="operation--testsuiteruns--id--start-put" class="swagger--panel-operation-put panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">Test Suite Runs</div>
+                    <h3 class="panel-title"><span class="operation-name">PUT</span> <strong>/testsuiteruns/{id}/start</strong></h3>
+                        Tags:
+                            <a href="#tag-Test-Suite-Run">Test Suite Run</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Transition the indvidual run to a Running state</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><p>Transition the run to Running</p>
+                        </p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                        
+                                                <section class="json-schema-properties">
+                                                    <dl>
+                                                            <dt data-property-name="startedAt">
+                                                                <span class="json-property-name">startedAt:</span>
+                                                                <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                
+                                                            </dt>
+                                                            <dd>
+                                                                <p>The time when this run transitioned into Running. If not specified the server will use its the time of receiving this request.</p>
+                                                
+                                                                <div class="json-inner-schema">
+                                                                    
+                                                                </div>
+                                                            </dd>
+                                                    </dl>
+                                                </section>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>        
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                id
+                                            <td><p>The id of the test suite you want to transition</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">Uses default content-types: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-204">
+                                        204 No Content
+                                    
+                                    </dt>
+                                    <dd class="sw-response-204">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>The test suite run is now Running</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                                    <div class="col-md-12">
+                                                        <section class="sw-response-headers">
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sw-response-header-name"></th>
+                                                                    <th class="sw-response-header-description"></th>
+                                                                    <th class="sw-response-header-data-type"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="sw-response-header-X-ElapsedTime">
+                                                                            <td>
+                                                                                X-ElapsedTime
+                                                                            <td><p>Number of milliseconds spent on the request</p>
+                                                                        </td>
+                                                                            <td>
+                                                                                <span class="json-property-type">number</span>    <span class="json-property-format">(double)</span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                    </div>
                                             </div>                </dd>
                                     <dt class="sw-response-default">
                                         default 
@@ -188,29 +1256,37 @@
                                 </h3>
                         </div>
                     <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>The response returned when a error happens</p>
+                            
+                                </section>
                             
                                     <section class="json-schema-properties">
                                         <dl>
-                                                <dt data-property-name="code">
-                                                    <span class="json-property-name">code:</span>
+                                                <dt data-property-name="statusCode">
+                                                    <span class="json-property-name">statusCode:</span>
                                                     <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                        <span class="json-property-required"></span>
                                                 </dt>
                                                 <dd>
-                                                    
+                                                    <p>The HTTP status code of the error (also returned in the response)</p>
+                                    
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
                                                 </dd>
-                                                <dt data-property-name="message">
-                                                    <span class="json-property-name">message:</span>
+                                                <dt data-property-name="error">
+                                                    <span class="json-property-name">error:</span>
                                                     <span class="json-property-type">string</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                        <span class="json-property-required"></span>
                                                 </dt>
                                                 <dd>
-                                                    
+                                                    <p>Error message of what went wrong</p>
+                                    
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
@@ -222,7 +1298,21 @@
                                                     
                                                 </dt>
                                                 <dd>
+                                                    <p>The fields that errored. Not always populated.</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="stackTrace">
+                                                    <span class="json-property-name">stackTrace:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                </dt>
+                                                <dd>
+                                                    <p>A stacktrace of what happened on the server when this error occured. Not always populated.</p>
+                                    
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
@@ -231,9 +1321,234 @@
                                     </section>
                     </div>
                 </div>        
-                <div id="definition-Product" class="panel panel-definition">
+                <div id="definition-JSONPatch" class="panel panel-definition">
                         <div class="panel-heading">
-                                <h3 class="panel-title"><a name="/definitions/Product"></a>Product:
+                                <h3 class="panel-title"><a name="/definitions/JSONPatch"></a>JSONPatch:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>A json patch operation, as defined here <a href="http://jsonpatch.com/">http://jsonpatch.com/</a></p>
+                            
+                                </section>
+                            
+                                    <section class="json-schema-properties">
+                                        <dl>
+                                                <dt data-property-name="op">
+                                                    <span class="json-property-name">op:</span>
+                                                    <span class="json-property-type">string</span>    <span class="json-property-enum" title="Possible values">, x &isin; {
+                                                                    <span class="json-property-enum-item">replace</span>
+                                                                ,
+                                                                    <span class="json-property-enum-item">add</span>
+                                                                ,
+                                                                    <span class="json-property-enum-item">remove</span>
+                                                                ,
+                                                                    <span class="json-property-enum-item">copy</span>
+                                                                ,
+                                                                    <span class="json-property-enum-item">move</span>
+                                                                ,
+                                                                    <span class="json-property-enum-item">test</span>
+                                                                
+                                                            }
+                                                            </span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="value">
+                                                    <span class="json-property-name">value:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>The new value to replace with</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="path">
+                                                    <span class="json-property-name">path:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The path descripting which field to update (see the documentation on jsonpatch.com)</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="from">
+                                                    <span class="json-property-name">from:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>The path to the field you wish to move</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                        </dl>
+                                    </section>
+                    </div>
+                </div>        
+                <div id="definition-NewObjectReference" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/NewObjectReference"></a>NewObjectReference:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>A reference to the id of the newly created object</p>
+                            
+                                </section>
+                            
+                                    <section class="json-schema-properties">
+                                        <dl>
+                                                <dt data-property-name="id">
+                                                    <span class="json-property-name">id:</span>
+                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="idStr">
+                                                    <span class="json-property-name">idStr:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>Unique id of this particular test suite as a string use this if you have a sucky parser</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                        </dl>
+                                    </section>
+                    </div>
+                </div>        
+                <div id="definition-Reference" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/Reference"></a>Reference:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>A link to a resource</p>
+                            
+                                </section>
+                            
+                                    <section class="json-schema-properties">
+                                        <dl>
+                                                <dt data-property-name="url">
+                                                    <span class="json-property-name">url:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>The url to the linked resource</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="rel">
+                                                    <span class="json-property-name">rel:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>Name of the relationship this link models</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                        </dl>
+                                    </section>
+                    </div>
+                </div>        
+                <div id="definition-State" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/State"></a>State:
+                                    <span class="json-property-type"><span class="json-property-type">string</span>    <span class="json-property-enum" title="Possible values">, x &isin; {
+                                <span class="json-property-enum-item">Pending</span>
+                                (default)
+                            ,
+                                <span class="json-property-enum-item">Running</span>
+                            ,
+                                <span class="json-property-enum-item">Finished</span>
+                            
+                        }
+                        </span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>The state of this object in Muffin</p>
+                            
+                                </section>
+                            
+                    </div>
+                </div>        
+                <div id="definition-Tags" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/Tags"></a>Tags:
+                                    <span class="json-property-type"><span class="json-property-type">string</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>A string indicating a grouping</p>
+                            
+                                </section>
+                            
+                    </div>
+                </div>        
+                <div id="definition-TestSuite" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/TestSuite"></a>TestSuite:
                                     <span class="json-property-type"><span class="json-property-type">object</span>
                 <span class="json-property-range" title="Value limits"></span>
                 
@@ -244,14 +1559,43 @@
                             
                                     <section class="json-schema-properties">
                                         <dl>
-                                                <dt data-property-name="product_id">
-                                                    <span class="json-property-name">product_id:</span>
+                                                <dt data-property-name="id">
+                                                    <span class="json-property-name">id:</span>
+                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="idStr">
+                                                    <span class="json-property-name">idStr:</span>
                                                     <span class="json-property-type">string</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                        <span class="json-property-required"></span>
                                                 </dt>
                                                 <dd>
-                                                    <p>Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.</p>
+                                                    <p>Unique id of this particular test suite as a string use this if you have a sucky parser</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="name">
+                                                    <span class="json-property-name">name:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The name of the test suite</p>
                                     
                                                     <div class="json-inner-schema">
                                                         
@@ -262,52 +1606,225 @@
                                                     <span class="json-property-type">string</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                        <span class="json-property-required"></span>
                                                 </dt>
                                                 <dd>
-                                                    <p>Description of product.</p>
+                                                    <p>A longer description of that this test suite does</p>
                                     
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
                                                 </dd>
-                                                <dt data-property-name="display_name">
-                                                    <span class="json-property-name">display_name:</span>
-                                                    <span class="json-property-type">string</span>
+                                                <dt data-property-name="tags">
+                                                    <span class="json-property-name">tags:</span>
+                                                    <span class="json-property-type">object[]</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
                                                 </dt>
                                                 <dd>
-                                                    <p>Display name of product.</p>
+                                                    <p>A set of tags that indicate that can be used to group test suites</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                                        <section class="json-schema-array-items">
+                                                                            <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Tags">Tags</a>
+                                                                            </span>
+                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                            
+                                                                            <div class="json-inner-schema">
+                                                                                
+                                                                            </div>
+                                                                        </section>                </div>
+                                                </dd>
+                                                <dt data-property-name="metadata">
+                                                    <span class="json-property-name">metadata:</span>
+                                                    <span class="json-property-type">object</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The metadata of the Test Suite, any patched values end up here. This is not versioned so you can never assume this contains particular fields.</p>
                                     
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
                                                 </dd>
-                                                <dt data-property-name="capacity">
-                                                    <span class="json-property-name">capacity:</span>
-                                                    <span class="json-property-type">string</span>
+                                                <dt data-property-name="references">
+                                                    <span class="json-property-name">references:</span>
+                                                    <span class="json-property-type">object[]</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
+                                                        <span class="json-property-required"></span>
                                                 </dt>
                                                 <dd>
-                                                    <p>Capacity of product. For example, 4 people.</p>
+                                                    <p>The related resources, possible relationships are:</p>
+                                    <ul>
+                                    <li>Runs</li>
+                                    </ul>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                                        <section class="json-schema-array-items">
+                                                                            <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Reference">Reference</a>
+                                                                            </span>
+                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                            
+                                                                            <div class="json-inner-schema">
+                                                                                
+                                                                            </div>
+                                                                        </section>                </div>
+                                                </dd>
+                                        </dl>
+                                    </section>
+                    </div>
+                </div>        
+                <div id="definition-TestSuiteRun" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/TestSuiteRun"></a>TestSuiteRun:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                            
+                                    <section class="json-schema-properties">
+                                        <dl>
+                                                <dt data-property-name="id">
+                                                    <span class="json-property-name">id:</span>
+                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>Unique id of this run of a test suite as an integer, use this if your parser can handle 64 bit values</p>
                                     
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
                                                 </dd>
-                                                <dt data-property-name="image">
-                                                    <span class="json-property-name">image:</span>
+                                                <dt data-property-name="idStr">
+                                                    <span class="json-property-name">idStr:</span>
+                                                    <span class="json-property-type">string</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>Unique id of this run of a test suite as a string use this if you have a sucky parser</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="createdAt">
+                                                    <span class="json-property-name">createdAt:</span>
+                                                    <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The time when this run was initially registered with Muffin.</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="startedAt">
+                                                    <span class="json-property-name">startedAt:</span>
+                                                    <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>The time when this run transitioned into the Running state.</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="endedAt">
+                                                    <span class="json-property-name">endedAt:</span>
+                                                    <span class="json-property-type">string</span>    <span class="json-property-format">(datetime)</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                </dt>
+                                                <dd>
+                                                    <p>The time when this run transitioned into the Finished state.</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="state">
+                                                    <span class="json-property-name">state:</span>
+                                                    <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/State">State</a>
+                                                    </span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="result">
+                                                    <span class="json-property-name">result:</span>
                                                     <span class="json-property-type">string</span>
                                                     <span class="json-property-range" title="Value limits"></span>
                                                     
                                                 </dt>
                                                 <dd>
-                                                    <p>Image URL representing the product.</p>
+                                                    <p>The result of the test suite as set when transitioning into the Finished state</p>
                                     
                                                     <div class="json-inner-schema">
                                                         
                                                     </div>
+                                                </dd>
+                                                <dt data-property-name="metadata">
+                                                    <span class="json-property-name">metadata:</span>
+                                                    <span class="json-property-type">object</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The metadata of this TestSuiteRun, any patched values end up here. This is not versioned so you can never assume this contains particular fields.</p>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                    </div>
+                                                </dd>
+                                                <dt data-property-name="references">
+                                                    <span class="json-property-name">references:</span>
+                                                    <span class="json-property-type">object[]</span>
+                                                    <span class="json-property-range" title="Value limits"></span>
+                                                    
+                                                        <span class="json-property-required"></span>
+                                                </dt>
+                                                <dd>
+                                                    <p>The related resources, possible relationships are:</p>
+                                    <ul>
+                                    <li>TestSuite</li>
+                                    </ul>
+                                    
+                                                    <div class="json-inner-schema">
+                                                        
+                                                                        <section class="json-schema-array-items">
+                                                                            <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Reference">Reference</a>
+                                                                            </span>
+                                                                            <span class="json-property-range" title="Value limits"></span>
+                                                                            
+                                                                            <div class="json-inner-schema">
+                                                                                
+                                                                            </div>
+                                                                        </section>                </div>
                                                 </dd>
                                         </dl>
                                     </section>
