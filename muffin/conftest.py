@@ -3,7 +3,7 @@
 import pytest
 from muffin.factories import create_app
 
-import muffin.backend as backend  # pylint: disable=unused-import
+import muffin.backend as be
 
 
 @pytest.fixture()
@@ -23,5 +23,7 @@ def app(request):
 
 
 @pytest.fixture()
-def db(request):  # pylint: disable=unused-argument
-    pass
+def backend(app):  # pylint:disable=W0621
+    be.init_app(app)
+    be.init_tables(drop_tables=True)
+    return be

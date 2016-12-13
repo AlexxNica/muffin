@@ -16,6 +16,7 @@ setup(name='Muffin',
           'jsonschema',
           'Flask-Script',
           'fake-factory',
-          'jsonpatch'
+          'jsonpatch',
+          'Flask-SQLAlchemy'
       ]
       )
