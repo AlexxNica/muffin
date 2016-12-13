@@ -25,9 +25,8 @@ DEBUG = True
 # otherwise default to only use a single shard 0
 #
 # Example:
-SHARD_MAPPINGS = {
-    0: "default",
-    1: "db1",
-    2: "db2",
-}
-
+# SHARD_MAPPINGS = {
+#     0: "default",
+#     1: "db1",
+#     2: "db2",
+# }
