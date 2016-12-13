@@ -1,7 +1,8 @@
 const ghpages = require('gh-pages');
 
 ghpages.publish('target', {
-  logger: function(message) {
-    console.log(message);
-  }
+	message: 'Auto-generated docs',
+	logger: function(message) {
+		console.log(message);
+	}
 }, null);
