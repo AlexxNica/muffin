@@ -107,9 +107,10 @@ def build_entity_id(db_id, shard_id):
     return (shard_id << 32) | (db_id << 0)
 
 
-def _generate_shard_id():  # TODO Will need to pick correct shard set to randomize
+# TODO Will need to pick correct shard set to randomize
+def _generate_shard_id():  # pragma: no cover :
     return random.sample(shard_id_set, 1)
 
 
-def _get_shard_engine(sid=None):
+def _get_shard_engine(sid=None):  # pragma: no cover :
     return db.get_engine(app=None, bind=shard_map[sid] if sid is not None else None)
