@@ -2,7 +2,7 @@
 [![Code Health](https://landscape.io/github/patissiere/muffin/master/landscape.svg?style=flat)](https://landscape.io/github/patissiere/muffin/master)
 [![codecov](https://codecov.io/gh/patissiere/muffin/branch/master/graph/badge.svg)](https://codecov.io/gh/patissiere/muffin)
 [![docs](https://img.shields.io/badge/docs-Read-blue.svg)](https://patissiere.github.io/muffin/)
-
+[![PyPI](https://img.shields.io/pypi/v/MuffinService.svg)](https://pypi.python.org/pypi/MuffinService)
 
 # Muffin
 Muffin is a structured reporting solution for test results

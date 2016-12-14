@@ -1,10 +1,22 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
+"""
+Muffin
+-----
+Muffin is a web service and a REST API for structured test result reporting.
+
+Links
+`````
+* `documentation <https://patissiere.github.io/muffin>`_
+* `github <https://github.com/patissiere/muffin>`_
+"""
 
 from setuptools import setup
 import muffin
 
-setup(name='Muffin',
+setup(name='MuffinService',
       version=muffin.VERSION,
+      description="Muffin is a solution for structured test result reporting",
+      long_description=__doc__,
       packages=['muffin', 'muffin/v2', 'muffin/manage'],
       py_modules=['wsgi', 'manage'],
       classifiers=[
@@ -12,11 +24,11 @@ setup(name='Muffin',
           'Programming Language :: Python :: 3.5',
       ],
       install_requires=[
-          'flask',
+          'Flask',
           'jsonschema',
           'Flask-Script',
           'fake-factory',
           'jsonpatch',
           'Flask-SQLAlchemy'
       ]
-      )
+     )

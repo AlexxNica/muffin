@@ -1,18 +1,23 @@
 language: python
 python:
-  - "3.5"
+- '3.5'
 install:
--  pip install -r requirements.txt
--  npm install
-
+- pip install -r requirements.txt
+- npm install
 script:
--  pylint muffin
--  pep8
--  py.test --cov
-
+- pylint muffin
+- pep8
+- py.test --cov
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run gen_docs && npm run upload_docs
-  
+- bash <(curl -s https://codecov.io/bash)
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run
+  gen_docs && npm run upload_docs
 notifications:
   slack: electronic-arts:FvYvNVGTBrChPb2ebil0EJN7
+deploy:
+  provider: pypi
+  user: muffin
+  password:
+    secure: dxIa8brQYo6EJfZQHTTZCBY9x3ujWVXiEgkZFhOSldfBBRZTLyLXqIb5yV9ah2SbdSesSUdqwmxSp8iYwOZ4mecvd847RcZdSk79eUY/KEBZj+VO3gSXoND3cfLOMGW/Jv0F2mGGLcHCAZe6rmWXjHykzraOYq9qv4R+Zp8sjnhEXb4+L6kY5wPIbgftW/SFYjGlWAUXzE8YPaCNhxVLdhsvAur90iQA/YLSZiKeW/e9dpgj4Tg3+kDao91IK/S5XKXXrmP6PFfl6PcsPQgX/7WWE6VP+JWyv6TgiSirNsp4GDrw4yfHK2waOUDbU5Gvnc0QTOqs3tDIK+UDkCQeiOqBNoA2nK9t+EJ5W+u4GzzmbsAzMeU8L7wV1/haKRxeeONseTe4hBCZDrlVcDdH0Qw/AdnUT9T2bvBebz8iTZ+1XE2hvbGMqo7SNB5Z+S0+mZ7lEYxV/PGwjQ7vFBHUgA+036bP62QdCVQq9s+d56apKVsmw6GMd3gzIVi/s6DMl0GDE8C7N+5kR4Ay1xYssCDLXm5TtDa9/ahDnW2wpH3K17mNvcL6QYpbEgQ+mNZCLsxPAyVkKfOSJQ6VDtOlFJa/NRTu59o01DUG/sBsbM8zcMOpl/FiFDjV6NMEZoh6AgQ7iRvMDnO5SC+xj+GYKQfgbHmWlAq4Wo8RsnTVpWA=
+  on:
+    tags: true
