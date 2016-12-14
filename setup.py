@@ -19,7 +19,7 @@ setup(
     description="Muffin is a solution for structured test result reporting",
     long_description=__doc__,
     packages=['muffin', 'muffin/v2', 'muffin/manage'],
-    py_modules=['wsgi', 'manage'],
+    py_modules=['manage'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 3.5'],
