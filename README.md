@@ -29,13 +29,6 @@ Run
 
 in the root directory to run all the tests.
 
-# Contributing
-
-- Make sure you document any API changes
-- Update the changelog
-- All new functionality must have unit tests
-- Unit tests coverage must be 100% at all times. Exclude things that should not be part of coverage statistics.
-
 # API Spec
 
 - Each endpoint should be clearly documented in which fields it supports filtering on, 
