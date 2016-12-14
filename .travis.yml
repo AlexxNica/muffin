@@ -14,5 +14,5 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run gen_docs && npm run upload_docs
   
- notifications:
+notifications:
   slack: electronic-arts:FvYvNVGTBrChPb2ebil0EJN7
