@@ -57,7 +57,8 @@ def _init_db_bindigs(app):
         binds[k] = _get_cs_from_db_binding(v)
 
 
-def init_tables(drop_tables=False):
+def init_tables(drop_tables=False):  # pragma: no cover
+    # nocover - init_tables is only used by seed and does nothing interesting
     db.reflect()
 
     if drop_tables:
@@ -66,7 +67,8 @@ def init_tables(drop_tables=False):
     db.create_all()
 
 
-def insert_projects(projects):
+def insert_projects(projects):  # pragma: no cover :
+    # nocover - # insert_projects is only used by seed and does nothing interesting
     engine = db.get_engine(app=None, bind=None)
     engine.execute(tables.projects_table.insert(), projects)
 

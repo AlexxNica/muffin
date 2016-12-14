@@ -3,5 +3,5 @@
 import json
 
 
-def get_json(response):
+def get_json(response):  # pragma: no cover
     return json.loads(response.get_data(as_text=True))

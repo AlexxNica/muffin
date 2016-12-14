@@ -8,7 +8,7 @@ install:
 script:
 -  pylint muffin
 -  pep8
--  py.test --cov=./
+-  py.test --cov
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
