@@ -65,7 +65,8 @@ def _init_db_bindigs(app):
     shard_id_set.update(set(shard_map.keys()))
 
 
-def init_tables(drop_tables=False):
+def init_tables(drop_tables=False):  # pragma: no cover
+    # nocover - init_tables is only used by seed and does nothing interesting
     db.reflect()
 
     if drop_tables:

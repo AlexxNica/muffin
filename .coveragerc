@@ -1,0 +1,6 @@
+[report]
+include=muffin/*
+
+exclude_lines =
+    pragma: no cover
+    if app.debug:

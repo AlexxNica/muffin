@@ -421,7 +421,7 @@ definitions:
         type: integer
         format: int32
         description: The HTTP status code of the error (also returned in the response)
-      error:
+      message:
         type: string
         description: Error message of what went wrong
       fields:

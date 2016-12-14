@@ -4,8 +4,7 @@ import time
 import random
 from flask_script import Command
 import flask
-from faker import Faker  # pylint: disable=unused-import
-import muffin.backend as backend  # pylint: disable=unused-import
+import muffin.backend as backend
 
 
 class SeedDatabase(Command):
