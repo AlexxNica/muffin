@@ -1,6 +1,5 @@
-import pytest
-import flask
 import json
+import flask
 import muffin.muffin_error as muffin_error
 
 
@@ -46,6 +45,7 @@ def test_muffin_error(app):
 
     del fail
 
+
 def test_400(app):
     @app.route("/raise")
     def fail():
@@ -87,4 +87,3 @@ def test_500(app):
     assert 'stackTrace' in data
 
     del fail
-
