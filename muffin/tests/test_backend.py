@@ -75,6 +75,15 @@ def test_empty_shard_config(app):
         backend.init_app(app)
 
 
+def test_id_mangling():
+    db_id = 322
+    shard_id = 12
+
+    entity_id = backend.build_entity_id(db_id, shard_id)
+    assert backend.get_db_id(entity_id) == db_id
+    assert backend.get_shard_id(entity_id) == shard_id
+
+
 def test_backend_destroy(test_backend):
     # Just doing a random operation until we actually use the backend fixture
     del test_backend
