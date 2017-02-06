@@ -30,7 +30,7 @@ Run
 in the root directory to run all the tests.
 
 # API Spec
-The rendered API documentation is available [here](https://patissiere.github.io/muffin/api/), while the documentation 
+The rendered API documentation is available [here](https://electronicarts.github.io/muffin/api/), while the documentation 
 source is available in the [source tree](docs) in the [Swagger](http://swagger.io/) specification.
 
 When contributing API changes, please follow the [API Guidelines](api_guidelines.md).
