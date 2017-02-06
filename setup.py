@@ -6,8 +6,8 @@ Muffin is a web service and a REST API for structured test result reporting.
 
 Links
 `````
-* `documentation <https://patissiere.github.io/muffin>`_
-* `github <https://github.com/patissiere/muffin>`_
+* `documentation <https://electronicarts.github.io/muffin>`_
+* `github <https://github.com/electronicarts/muffin>`_
 """
 
 from setuptools import setup
