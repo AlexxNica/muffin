@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/patissiere/muffin.svg?branch=master)](https://travis-ci.org/patissiere/muffin)
-[![Code Health](https://landscape.io/github/patissiere/muffin/master/landscape.svg?style=flat)](https://landscape.io/github/patissiere/muffin/master)
-[![codecov](https://codecov.io/gh/patissiere/muffin/branch/master/graph/badge.svg)](https://codecov.io/gh/patissiere/muffin)
-[![docs](https://img.shields.io/badge/docs-Read-blue.svg)](https://patissiere.github.io/muffin/)
+[![Build Status](https://travis-ci.org/electronicarts/muffin.svg?branch=master)](https://travis-ci.org/patissiere/muffin)
+[![Code Health](https://landscape.io/github/electronicarts/muffin/master/landscape.svg?style=flat)](https://landscape.io/github/electronicarts/muffin/master)
+[![codecov](https://codecov.io/gh/electronicarts/muffin/branch/master/graph/badge.svg)](https://codecov.io/gh/patissiere/muffin)
+[![docs](https://img.shields.io/badge/docs-Read-blue.svg)](https://electronicarts.github.io/muffin/)
 [![PyPI](https://img.shields.io/pypi/v/MuffinService.svg)](https://pypi.python.org/pypi/MuffinService)
 
 # Muffin
