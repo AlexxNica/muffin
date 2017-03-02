@@ -3,8 +3,10 @@
 [![codecov](https://codecov.io/gh/electronicarts/muffin/branch/master/graph/badge.svg)](https://codecov.io/gh/electronicarts/muffin)
 [![docs](https://img.shields.io/badge/docs-Read-blue.svg)](https://electronicarts.github.io/muffin/)
 [![PyPI version](https://badge.fury.io/py/MuffinService.svg)](https://badge.fury.io/py/MuffinService)
+[![Join the chat at https://gitter.im/electronicarts/muffin](https://badges.gitter.im/electronicarts/muffin.svg)](https://gitter.im/electronicarts/muffin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Muffin
+
 Muffin is a structured reporting solution for test results
 
 # Setting up dev environment
