@@ -85,6 +85,9 @@ ENV/
 # PyCharm
 .idea
 
+# VSCode
+.vscode
+
 # Node.js
 node_modules
 
