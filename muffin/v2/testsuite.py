@@ -1,13 +1,17 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import flask
+import muffin.backend as backend
 
 testsuites_blueprint = flask.Blueprint("testsuites", __name__)
 
 
 @testsuites_blueprint.route('/testsuites', methods=['GET'])
 def list_testsuites():
-    return flask.jsonify({"hello": "world"})
+    testsuites = []
+
+    backend.get_testsuites(None)
+    return flask.jsonify({"testsuites": testsuites})
 
 
 @testsuites_blueprint.route('/testsuites/<int:testsuite_id>', methods=['GET'])

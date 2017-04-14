@@ -23,13 +23,13 @@ def create_app(config_file):
 
     def before_request():
         g.muffin_start_request = time.clock()
-    
+
     def after_request(response):
         end = time.clock()
         response.headers['X-ElapsedTime'] = end - g.muffin_start_request
         return response
 
-    app.before_request(before_request) 
+    app.before_request(before_request)
     app.after_request(after_request)
 
     # init backend

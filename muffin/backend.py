@@ -95,6 +95,13 @@ def insert_tags(tags, tag_mapping):
     engine.execute(tables.tagmappingtestsuite_table.insert(), tag_mapping)
 
 
+def get_testsuites(entity_id):
+    sid = get_shard_id(entity_id)
+    db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    return engine.execute(tables.testsuite_table.select(), db_id)
+
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
 #     engine.execute(tables.projects_table.insert(), projects)

@@ -3,20 +3,17 @@
 import json
 from muffin.v2.tests import get_json
 
-
- # pylint: disable=duplicate-code
 def test_list(app, backend):
-
     backend.insert_testsuites([
         {
-            "name": "TestSuite Name",
-            "description": "A cool description",
+            "name": "A test suite name",
+            "description": "A description",
             "metadata": "{}"
         },
         {
-            "name": "Another testsuite",
-            "description": "A boring description",
-            "metadata": str(json.dumps({"platform": "windows"}))
+            "name": "2nd testsuite",
+            "description": "Foo bar",
+            "metadata": str(json.dumps({"platform": "ps4"}))
         }
     ])
 
@@ -26,7 +23,7 @@ def test_list(app, backend):
     assert r.status_code == 200
 
     assert 'X-ElapsedTime' in r.headers
- 
+
     data = get_json(r)
     assert len(data['testsuites']) == 2
 
