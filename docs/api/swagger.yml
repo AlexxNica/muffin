@@ -253,7 +253,51 @@ paths:
           description: Unexpected error
           schema:
             $ref: "#/definitions/Error"
-  /testsuite/{id}:
+  /testsuites/:
+    get:
+      summary: Test Suite
+      description: |
+        Lists all known test suites
+      tags:
+        - Test Suite
+      responses:
+        200:
+          description: The general description of the test suite that was being run
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/TestSuite"
+          headers:
+            X-ElapsedTime:
+              description: Number of milliseconds spent on the request
+              type: number
+              format: double
+          examples:
+            application/json: 
+            "testsuites' : [{
+                "id": 2,
+                "id_str": "2",
+                "name": "Frostbite Rendering (Mantle)",
+                "description": "Includes all tests from the frostbite rendering test suite asset.",
+                "tags": [
+                  "Mantle"
+                ],
+                "metadata" : {
+                  "data_set": "Example",
+                  "maintaner_name": "Albert Cervin",
+                  "maintainer_email": "albert.cervin@frostbite.com",
+                },
+                "references": [
+                {
+                  "url": "/testsuiteruns?suite=2",
+                  "rel": "runs"
+                }]
+            }]
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+  /testsuites/{id}:
     get:
       summary: Test Suite
       description: |

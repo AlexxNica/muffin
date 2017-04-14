@@ -24,7 +24,7 @@ def app(request):
 
 
 @pytest.fixture()
-def test_backend(app):  # pylint:disable=W0621
+def backend(app):  # pylint:disable=W0621
     be.init_app(app)
     be.init_tables(drop_tables=True)
     return be

@@ -1,14 +1,17 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import flask
+from . import testsuite
 
-hello_blueprint = flask.Blueprint("hello", __name__)
+ping_blueprint = flask.Blueprint("ping", __name__)
 
 
-@hello_blueprint.route('/')
-def hello():  # pragma: no cover
+@ping_blueprint.route('/ping')
+def ping():  # pragma: no cover
     return flask.jsonify({"hello": "world"})
 
 
 def register_api(app, url_prefix):
-    app.register_blueprint(hello_blueprint, url_prefix=url_prefix)
+    app.register_blueprint(ping_blueprint, url_prefix=url_prefix)
+
+    testsuite.register_api(app, url_prefix)
