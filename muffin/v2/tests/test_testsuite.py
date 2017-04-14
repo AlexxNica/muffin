@@ -6,6 +6,7 @@ from muffin.v2.tests import get_json
 
 def test_list(app, backend):
 
+    #pylint: disable=duplicate-code
     backend.insert_testsuites([
         {
             "name": "TestSuite Name",
