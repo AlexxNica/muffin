@@ -4,9 +4,9 @@ import json
 from muffin.v2.tests import get_json
 
 
+ # pylint: disable=duplicate-code
 def test_list(app, backend):
 
-    #pylint: disable=duplicate-code
     backend.insert_testsuites([
         {
             "name": "TestSuite Name",
@@ -25,6 +25,8 @@ def test_list(app, backend):
 
     assert r.status_code == 200
 
+    assert 'X-ElapsedTime' in r.headers
+ 
     data = get_json(r)
     assert len(data['testsuites']) == 2
 
