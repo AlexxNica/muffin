@@ -8,14 +8,14 @@ def test_list(app, backend):
 
     backend.insert_testsuites([
         {
-            "name" : "TestSuite Name",
+            "name": "TestSuite Name",
             "description": "A cool description",
             "metadata": "{}"
         },
         {
-            "name" : "Another testsuite",
+            "name": "Another testsuite",
             "description": "A boring description",
-            "metadata": str(json.dumps({"platform" : "windows"}))
+            "metadata": str(json.dumps({"platform": "windows"}))
         }
     ])
 
@@ -26,7 +26,6 @@ def test_list(app, backend):
 
     data = get_json(r)
     assert len(data['testsuites']) == 2
-
 
     for ts in data['testsuites']:
 

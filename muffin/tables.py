@@ -3,7 +3,7 @@
 from muffin.database import db
 
 db_identifier = db.String(30)
-db_metadata = db.String(None) # None means varchar(max)
+db_metadata = db.String(None)  # None means varchar(max)
 
 # Identifiers are always 30 characters
 # Metadata is VARCHAR(max) and should exist
@@ -52,8 +52,8 @@ testsuite_ended_table = db.Table('testsuite_ended',
 
 # Test suite tags
 
-#TODO: Should tags use the name as their primary key?
-#Seems we should at least have a unique key on the name to prevent duplicates
+# TODO: Should tags use the name as their primary key?
+# Seems we should at least have a unique key on the name to prevent duplicates
 
 tag_table = db.Table('tag',
                      db.Column('id', db.Integer, primary_key=True),

@@ -74,9 +74,11 @@ def init_tables(drop_tables=False):  # pragma: no cover
 
     db.create_all()
 
+
 def insert_testsuites(testsuite):
     engine = _get_shard_engine(sid=None)  # get default shard
     engine.execute(tables.testsuite_table.insert(), testsuite)
+
 
 def insert_runs(runs_of_testsuites):
     engine = _get_shard_engine(sid=None)  # get default shard
@@ -85,11 +87,13 @@ def insert_runs(runs_of_testsuites):
     engine.execute(tables.testsuite_started_table.insert(), [r[1] for r in runs_of_testsuites if r[1]])
     engine.execute(tables.testsuite_ended_table.insert(), [r[2] for r in runs_of_testsuites if r[2]])
 
+
 def insert_tags(tags, tag_mapping):
     engine = _get_shard_engine(sid=None)  # get default shard
 
     engine.execute(tables.tag_table.insert(), tags)
     engine.execute(tables.tagmappingtestsuite_table.insert(), tag_mapping)
+
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
