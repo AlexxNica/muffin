@@ -97,10 +97,11 @@ def insert_tags(tags, tag_mapping):
 
 def get_testsuites(entity_id):
     sid = get_shard_id(entity_id)
-    db_id = get_db_id(entity_id)
+    # db_id = get_db_id(entity_id)
     engine = _get_shard_engine(sid)
 
-    return engine.execute(tables.testsuite_table.select(), db_id)
+    # TODO: what to do with the db_id
+    return engine.execute(tables.testsuite_table.select())
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
@@ -122,11 +123,15 @@ def init_app(app):
 
 
 def get_shard_id(entity_id):
+    if entity_id is None:
+        return None
     # first 32 bits are db id. 16 after is shard id. Rest is left for future.
     return (entity_id >> 32) & 0xffff
 
 
 def get_db_id(entity_id):
+    if entity_id is None:
+        return None
     return entity_id & 0xffffffff
 
 

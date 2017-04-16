@@ -2,6 +2,7 @@
 
 import flask
 from . import testsuite
+from . import testsuite_runs
 
 ping_blueprint = flask.Blueprint("ping", __name__)
 
@@ -15,3 +16,4 @@ def register_api(app, url_prefix):
     app.register_blueprint(ping_blueprint, url_prefix=url_prefix)
 
     testsuite.register_api(app, url_prefix)
+    testsuite_runs.register_api(app, url_prefix)

@@ -1,9 +1,9 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import json
-from muffin.v2.tests import get_json
+from muffin.v2.tests import get_json, create_customer_headers
 
-def test_list(app, backend):
+def test_list(app, backend, customer_id):
     backend.insert_testsuites([
         {
             "name": "A test suite name",
@@ -18,7 +18,7 @@ def test_list(app, backend):
     ])
 
     # fetch and verify
-    r = app.test_client().get('/api/v2/testsuites')
+    r = app.test_client().get('/api/v2/testsuites', headers=create_customer_headers(customer_id))
 
     assert r.status_code == 200
 
@@ -29,6 +29,8 @@ def test_list(app, backend):
 
     for ts in data['testsuites']:
 
+        assert 'id' in ts
+        assert 'id_str' in ts
         assert 'name' in ts
         assert 'description' in ts
         assert 'metadata' in ts
@@ -38,4 +40,7 @@ def test_list(app, backend):
             assert 'rel' in ref
             assert 'url' in ref
             if ref['rel'] == "runs":
-                assert ref['runs'] == '/api/v2/testsuiteruns?suite=' + str(ts['id'])
+                assert ref['url'] == '/api/v2/testsuiteruns?suite=' + str(ts['id'])
+
+        assert 'tags' in ts
+        # TODO : Verify tags

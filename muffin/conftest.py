@@ -28,3 +28,8 @@ def backend(app):  # pylint:disable=W0621
     be.init_app(app)
     be.init_tables(drop_tables=True)
     return be
+
+
+@pytest.fixture()
+def customer_id():
+    return ""
