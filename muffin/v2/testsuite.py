@@ -1,5 +1,6 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
+import json
 import flask
 import muffin.backend as backend
 from muffin.v2.request_utils import get_customer_id, create_reference_to
@@ -9,7 +10,6 @@ testsuites_blueprint = flask.Blueprint("testsuites", __name__)
 
 @testsuites_blueprint.route('/testsuites', methods=['GET'])
 def list_testsuites():
-
     customer_id = get_customer_id(flask.request)
     testsuites = []
 
@@ -20,8 +20,12 @@ def list_testsuites():
 
 
 @testsuites_blueprint.route('/testsuites/<int:testsuite_id>', methods=['GET'])
-def get_testsuite():
-    return flask.jsonify({"hello": "world"})
+def get_testsuite(testsuite_id):
+    customer_id = get_customer_id(flask.request)
+
+    suite = backend.get_testsuite(customer_id, testsuite_id)
+
+    return flask.jsonify(create_api_v2_testsuite(suite))
 
 
 @testsuites_blueprint.route('/testsuites/<int:testsuite_id>', methods=['DELETE'])
@@ -35,7 +39,7 @@ def create_api_v2_testsuite(suite):
         'id_str' : str(suite['id']),
         'name' : suite['name'],
         'description' : suite['description'],
-        'metadata' : suite['metadata'],
+        'metadata' : json.loads(suite['metadata']),
         'references' : [create_reference_to('runs', 'testsuite_runs.list_testsuite_runs', suite=suite['id'])],
         'tags' : [] # TODO: implement tags
     }

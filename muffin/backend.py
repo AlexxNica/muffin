@@ -3,7 +3,7 @@
 import random
 from muffin.database import db
 import muffin.tables as tables
-
+from sqlalchemy.orm import sessionmaker
 
 shard_id_set = set([0])  # TODO we will need one set for each project in the future
 shard_map = {0: "default"}
@@ -54,7 +54,8 @@ def _init_db_bindigs(app):
 
     # setup default db binding
     app.config['SQLALCHEMY_DATABASE_URI'] = _get_cs_from_db_binding(default_db)
-    del databases['default']
+    # TODO: Why are we doing this?
+    # del databases['default']
 
     # setup rest
     binds = app.config['SQLALCHEMY_BINDS'] = {}
@@ -102,6 +103,18 @@ def get_testsuites(entity_id):
 
     # TODO: what to do with the db_id
     return engine.execute(tables.testsuite_table.select())
+
+
+def get_testsuite(entity_id, testsuite_id):
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+    session_maker = sessionmaker(bind=engine)
+    session = session_maker()
+
+    # TODO: what to do with the db_id
+    return session.query(tables.testsuite_table).filter(tables.testsuite_table.c.id == testsuite_id).one()._asdict()
+
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
