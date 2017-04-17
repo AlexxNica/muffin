@@ -92,3 +92,21 @@ def test_list_specific(app, backend, customer_id):
 
     assert 'tags' in ts
     # TODO : Verify tags
+
+
+def test_delete(app, backend, customer_id):
+    backend.insert_testsuites([
+        {
+            "id": 5,
+            "name": "A test suite name",
+            "description": "A description",
+            "metadata": "{}"
+        }
+    ])
+
+    # fetch and verify
+    r = app.test_client().delete('/api/v2/testsuites/5', headers=create_customer_headers(customer_id))
+
+    assert r.status_code == 204
+
+    assert 'X-ElapsedTime' in r.headers

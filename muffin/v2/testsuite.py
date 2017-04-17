@@ -29,8 +29,9 @@ def get_testsuite(testsuite_id):
 
 
 @testsuites_blueprint.route('/testsuites/<int:testsuite_id>', methods=['DELETE'])
-def delete_testsuite():
-    return flask.jsonify({"hello": "world"})
+def delete_testsuite(testsuite_id):  # pylint:disable=W0613
+    # TODO: Implement DELETE of Testsuite
+    return "", 204
 
 
 def create_api_v2_testsuite(suite):

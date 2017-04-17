@@ -10,10 +10,19 @@ def get_customer_id(request):
     customer_id = request.headers["muffin-customer-id"]
     if customer_id == '':
         return None
-    return int(customer_id)
+
+    try:
+        return int(customer_id)
+    except ValueError:
+        raise CustomerIdFormatException
 
 
 class CustomerIdRequiredException(Exception):
+    def __init__(self):
+        super().__init__(self)
+
+
+class CustomerIdFormatException(Exception):
     def __init__(self):
         super().__init__(self)
 
