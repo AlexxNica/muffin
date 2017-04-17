@@ -9,6 +9,7 @@ import muffin.backend as backend
 import muffin.muffin_error as muffin_error
 from muffin.v2 import register_api as register_api
 
+
 def create_app(config_file):
     app = Flask("muffin")
     app.config.from_pyfile(config_file)

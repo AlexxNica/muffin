@@ -3,6 +3,7 @@
 import json
 from muffin.v2.tests import get_json, create_customer_headers
 
+
 def test_list(app, backend, customer_id):
     backend.insert_testsuites([
         {
@@ -49,13 +50,13 @@ def test_list(app, backend, customer_id):
 def test_list_specific(app, backend, customer_id):
     backend.insert_testsuites([
         {
-            "id" : 1,
+            "id": 1,
             "name": "A test suite name",
             "description": "A description",
             "metadata": "{}"
         },
         {
-            "id" : 2,
+            "id": 2,
             "name": "2nd testsuite",
             "description": "Foo bar",
             "metadata": str(json.dumps({"platform": "ps4"}))

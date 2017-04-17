@@ -12,6 +12,7 @@ def get_customer_id(request):
         return None
     return int(customer_id)
 
+
 class CustomerIdRequiredException(Exception):
     def __init__(self):
         super().__init__(self)
@@ -19,4 +20,3 @@ class CustomerIdRequiredException(Exception):
 
 def create_reference_to(name, endpoint_name, **values):
     return {'rel': name, 'url': flask.url_for(endpoint_name, **values)}
- 

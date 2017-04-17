@@ -35,13 +35,13 @@ def delete_testsuite():
 
 def create_api_v2_testsuite(suite):
     return {
-        'id' : suite['id'],
-        'id_str' : str(suite['id']),
-        'name' : suite['name'],
-        'description' : suite['description'],
-        'metadata' : json.loads(suite['metadata']),
-        'references' : [create_reference_to('runs', 'testsuite_runs.list_testsuite_runs', suite=suite['id'])],
-        'tags' : [] # TODO: implement tags
+        'id': suite['id'],
+        'id_str': str(suite['id']),
+        'name': suite['name'],
+        'description': suite['description'],
+        'metadata': json.loads(suite['metadata']),
+        'references': [create_reference_to('runs', 'testsuite_runs.list_testsuite_runs', suite=suite['id'])],
+        'tags': []  # TODO: implement tags
     }
 
 
