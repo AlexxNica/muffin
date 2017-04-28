@@ -3,7 +3,7 @@
 import random
 from muffin.database import db
 import muffin.tables as tables
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql import select
 
 shard_id_set = set([0])  # TODO we will need one set for each project in the future
 shard_map = {0: "default"}
@@ -96,24 +96,31 @@ def insert_tags(tags, tag_mapping):
     engine.execute(tables.tagmappingtestsuite_table.insert(), tag_mapping)
 
 
-def get_testsuites(entity_id):
+def get_testsuites(entity_id, fields):
     sid = get_shard_id(entity_id)
     # db_id = get_db_id(entity_id)
     engine = _get_shard_engine(sid)
 
     # TODO: what to do with the db_id
-    return engine.execute(tables.testsuite_table.select())
+    if fields:
+        s = select([tables.testsuite_table.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite_table])
+    return engine.execute(s)
 
 
-def get_testsuite(entity_id, testsuite_id):
+def get_testsuite(entity_id, testsuite_id, fields):
     sid = get_shard_id(entity_id)
     # db_id = get_db_id(entity_id)
     engine = _get_shard_engine(sid)
-    session_maker = sessionmaker(bind=engine)
-    session = session_maker()
 
     # TODO: what to do with the db_id
-    return session.query(tables.testsuite_table).filter(tables.testsuite_table.c.id == testsuite_id).one()._asdict()
+    if fields:
+        s = select([tables.testsuite_table.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite_table])
+    t = s.where(tables.testsuite_table.c.id == testsuite_id)
+    return engine.execute(t).fetchone()
 
 
 # def insert_projects(projects):

@@ -4,7 +4,7 @@ import json
 from muffin.v2.tests import get_json, create_customer_headers
 
 
-def test_list(app, backend, customer_id):
+def test_list_testsuites_all(app, backend, customer_id):
     backend.insert_testsuites([
         {
             "name": "A test suite name",
@@ -45,6 +45,43 @@ def test_list(app, backend, customer_id):
 
         assert 'tags' in ts
         # TODO : Verify tags
+
+
+def test_list_testsuites_all_filter(app, backend, customer_id):
+    backend.insert_testsuites([
+        {
+            "name": "A test suite name",
+            "description": "A description",
+            "metadata": "{}"
+        },
+        {
+            "name": "2nd testsuite",
+            "description": "Foo bar",
+            "metadata": str(json.dumps({"platform": "ps4"}))
+        }
+    ])
+
+    # fetch and verify
+    r = app.test_client().get('/api/v2/testsuites',
+                              headers=create_customer_headers(customer_id),
+                              query_string="fields=id,name")
+
+    assert r.status_code == 200
+    assert 'X-ElapsedTime' in r.headers
+
+    data = get_json(r)
+    assert len(data['testsuites']) == 2
+
+    for ts in data['testsuites']:
+
+        assert 'id' in ts
+        assert 'name' in ts
+
+        assert 'id_str' not in ts
+        assert 'description' not in ts
+        assert 'metadata' not in ts
+        assert 'references' not in ts
+        assert 'tags' not in ts
 
 
 def test_list_specific(app, backend, customer_id):

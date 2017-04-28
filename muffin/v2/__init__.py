@@ -4,7 +4,6 @@ import flask
 from . import testsuite
 from . import testsuite_runs
 
-
 ping_blueprint = flask.Blueprint("ping", __name__)
 
 

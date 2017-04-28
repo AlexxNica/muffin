@@ -27,5 +27,15 @@ class CustomerIdFormatException(Exception):
         super().__init__(self)
 
 
+def get_common_params(request):
+    fields = request.args.get('fields')
+    if fields:
+        fields = fields.split(',')
+
+    per_page = request.args.get('per_page')
+
+    return (fields, per_page)
+
+
 def create_reference_to(name, endpoint_name, **values):
     return {'rel': name, 'url': flask.url_for(endpoint_name, **values)}
