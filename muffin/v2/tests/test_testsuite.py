@@ -64,7 +64,7 @@ def test_list_testsuites_all_filter(app, backend, customer_id):
     # fetch and verify
     r = app.test_client().get('/api/v2/testsuites',
                               headers=create_customer_headers(customer_id),
-                              query_string="fields=id,name")
+                              query_string="fields=id,name,references")
 
     assert r.status_code == 200
     assert 'X-ElapsedTime' in r.headers
@@ -80,7 +80,7 @@ def test_list_testsuites_all_filter(app, backend, customer_id):
         assert 'id_str' not in ts
         assert 'description' not in ts
         assert 'metadata' not in ts
-        assert 'references' not in ts
+        assert 'references' in ts
         assert 'tags' not in ts
 
 
