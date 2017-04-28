@@ -284,8 +284,8 @@ paths:
                 ],
                 "metadata" : {
                   "data_set": "Example",
-                  "maintaner_name": "Albert Cervin",
-                  "maintainer_email": "albert.cervin@frostbite.com",
+                  "maintaner_name": "Donald Duck",
+                  "maintainer_email": "duck@domain.com",
                 },
                 "references": [
                 {
@@ -332,8 +332,8 @@ paths:
                 ],
                 "metadata" : {
                   "data_set": "Example",
-                  "maintaner_name": "Albert Cervin",
-                  "maintainer_email": "albert.cervin@frostbite.com",
+                  "maintaner_name": "Donald Duck",
+                  "maintainer_email": "duck@domain.com",
                 },
                 "references": [
                 {

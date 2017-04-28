@@ -78,22 +78,22 @@ def init_tables(drop_tables=False):  # pragma: no cover
 
 def insert_testsuites(testsuite):
     engine = _get_shard_engine(sid=None)  # get default shard
-    engine.execute(tables.testsuite_table.insert(), testsuite)
+    engine.execute(tables.testsuite.insert(), testsuite)
 
 
 def insert_runs(runs_of_testsuites):
     engine = _get_shard_engine(sid=None)  # get default shard
 
-    engine.execute(tables.testsuite_run_table.insert(), [r[0] for r in runs_of_testsuites])
-    engine.execute(tables.testsuite_started_table.insert(), [r[1] for r in runs_of_testsuites if r[1]])
-    engine.execute(tables.testsuite_ended_table.insert(), [r[2] for r in runs_of_testsuites if r[2]])
+    engine.execute(tables.testsuite_run.insert(), [r[0] for r in runs_of_testsuites])
+    engine.execute(tables.testsuite_started.insert(), [r[1] for r in runs_of_testsuites if r[1]])
+    engine.execute(tables.testsuite_ended.insert(), [r[2] for r in runs_of_testsuites if r[2]])
 
 
 def insert_tags(tags, tag_mapping):
     engine = _get_shard_engine(sid=None)  # get default shard
 
-    engine.execute(tables.tag_table.insert(), tags)
-    engine.execute(tables.tagmappingtestsuite_table.insert(), tag_mapping)
+    engine.execute(tables.tag.insert(), tags)
+    engine.execute(tables.tagmappingtestsuite.insert(), tag_mapping)
 
 
 def get_testsuites(entity_id, fields):
@@ -103,9 +103,9 @@ def get_testsuites(entity_id, fields):
 
     # TODO: what to do with the db_id
     if fields:
-        s = select([tables.testsuite_table.c[f] for f in fields])
+        s = select([tables.testsuite.c[f] for f in fields])
     else:
-        s = select([tables.testsuite_table])
+        s = select([tables.testsuite])
     return engine.execute(s)
 
 
@@ -116,16 +116,16 @@ def get_testsuite(entity_id, testsuite_id, fields):
 
     # TODO: what to do with the db_id
     if fields:
-        s = select([tables.testsuite_table.c[f] for f in fields])
+        s = select([tables.testsuite.c[f] for f in fields])
     else:
-        s = select([tables.testsuite_table])
-    t = s.where(tables.testsuite_table.c.id == testsuite_id)
+        s = select([tables.testsuite])
+    t = s.where(tables.testsuite.c.id == testsuite_id)
     return engine.execute(t).fetchone()
 
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
-#     engine.execute(tables.projects_table.insert(), projects)
+#     engine.execute(tables.projects.insert(), projects)
 
 
 # example of how to get correct shard and id

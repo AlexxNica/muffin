@@ -1,6 +1,7 @@
 # Copyright (C) Electronic Arts Inc.  All rights reserved.
 
 import flask
+from muffin.muffin_error import MuffinError
 
 
 def get_customer_id(request):
@@ -17,14 +18,14 @@ def get_customer_id(request):
         raise CustomerIdFormatException
 
 
-class CustomerIdRequiredException(Exception):
+class CustomerIdRequiredException(MuffinError):
     def __init__(self):
-        super().__init__(self)
+        super().__init__("You have to specify a muffin-customer-id field")
 
 
-class CustomerIdFormatException(Exception):
+class CustomerIdFormatException(MuffinError):
     def __init__(self):
-        super().__init__(self)
+        super().__init__("The muffin-customer-id field was not in a correct format")
 
 
 def get_common_params(request):
