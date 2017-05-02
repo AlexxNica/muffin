@@ -2,8 +2,8 @@
 
 import random
 from muffin.database import db
-# import muffin.tables as tables
-
+import muffin.tables as tables
+from sqlalchemy.sql import select
 
 shard_id_set = set([0])  # TODO we will need one set for each project in the future
 shard_map = {0: "default"}
@@ -54,7 +54,8 @@ def _init_db_bindigs(app):
 
     # setup default db binding
     app.config['SQLALCHEMY_DATABASE_URI'] = _get_cs_from_db_binding(default_db)
-    del databases['default']
+    # TODO: Why are we doing this?
+    # del databases['default']
 
     # setup rest
     binds = app.config['SQLALCHEMY_BINDS'] = {}
@@ -75,9 +76,56 @@ def init_tables(drop_tables=False):  # pragma: no cover
     db.create_all()
 
 
+def insert_testsuites(testsuite):
+    engine = _get_shard_engine(sid=None)  # get default shard
+    engine.execute(tables.testsuite.insert(), testsuite)
+
+
+def insert_runs(runs_of_testsuites):
+    engine = _get_shard_engine(sid=None)  # get default shard
+
+    engine.execute(tables.testsuite_run.insert(), [r[0] for r in runs_of_testsuites])
+    engine.execute(tables.testsuite_started.insert(), [r[1] for r in runs_of_testsuites if r[1]])
+    engine.execute(tables.testsuite_ended.insert(), [r[2] for r in runs_of_testsuites if r[2]])
+
+
+def insert_tags(tags, tag_mapping):
+    engine = _get_shard_engine(sid=None)  # get default shard
+
+    engine.execute(tables.tag.insert(), tags)
+    engine.execute(tables.tagmappingtestsuite.insert(), tag_mapping)
+
+
+def get_testsuites(entity_id, fields):
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    # TODO: what to do with the db_id
+    if fields:
+        s = select([tables.testsuite.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite])
+    return engine.execute(s)
+
+
+def get_testsuite(entity_id, testsuite_id, fields):
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    # TODO: what to do with the db_id
+    if fields:
+        s = select([tables.testsuite.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite])
+    t = s.where(tables.testsuite.c.id == testsuite_id)
+    return engine.execute(t).fetchone()
+
+
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
-#     engine.execute(tables.projects_table.insert(), projects)
+#     engine.execute(tables.projects.insert(), projects)
 
 
 # example of how to get correct shard and id
@@ -95,11 +143,15 @@ def init_app(app):
 
 
 def get_shard_id(entity_id):
+    if entity_id is None:
+        return None
     # first 32 bits are db id. 16 after is shard id. Rest is left for future.
     return (entity_id >> 32) & 0xffff
 
 
 def get_db_id(entity_id):
+    if entity_id is None:
+        return None
     return entity_id & 0xffffffff
 
 
