@@ -5,18 +5,20 @@ from muffin.v2.tests import get_json, create_customer_headers
 
 
 def test_list_testsuites_all(app, backend, customer_id):
-    backend.insert_testsuites([
-        {
-            "name": "A test suite name",
-            "description": "A description",
-            "metadata": "{}"
-        },
-        {
-            "name": "2nd testsuite",
-            "description": "Foo bar",
-            "metadata": str(json.dumps({"platform": "ps4"}))
-        }
-    ])
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "A test suite name",
+                                 "description": "A description",
+                                 "metadata": "{}"
+                             }
+                            )
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "2nd testsuite",
+                                 "description": "Foo bar",
+                                 "metadata": str(json.dumps({"platform": "ps4"}))
+                             }
+                            )
 
     # fetch and verify
     r = app.test_client().get('/api/v2/testsuites', headers=create_customer_headers(customer_id))
@@ -48,18 +50,20 @@ def test_list_testsuites_all(app, backend, customer_id):
 
 
 def test_list_testsuites_all_filter(app, backend, customer_id):
-    backend.insert_testsuites([
-        {
-            "name": "A test suite name",
-            "description": "A description",
-            "metadata": "{}"
-        },
-        {
-            "name": "2nd testsuite",
-            "description": "Foo bar",
-            "metadata": str(json.dumps({"platform": "ps4"}))
-        }
-    ])
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "A test suite name",
+                                 "description": "A description",
+                                 "metadata": "{}"
+                             }
+                            )
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "2nd testsuite",
+                                 "description": "Foo bar",
+                                 "metadata": str(json.dumps({"platform": "ps4"}))
+                             }
+                            )
 
     # fetch and verify
     r = app.test_client().get('/api/v2/testsuites',
@@ -85,20 +89,19 @@ def test_list_testsuites_all_filter(app, backend, customer_id):
 
 
 def test_list_specific(app, backend, customer_id):
-    backend.insert_testsuites([
-        {
-            "id": 1,
-            "name": "A test suite name",
-            "description": "A description",
-            "metadata": "{}"
-        },
-        {
-            "id": 2,
-            "name": "2nd testsuite",
-            "description": "Foo bar",
-            "metadata": str(json.dumps({"platform": "ps4"}))
-        }
-    ])
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "A test suite name",
+                                 "description": "A description",
+                                 "metadata": "{}"
+                             })
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "2nd testsuite",
+                                 "description": "Foo bar",
+                                 "metadata": str(json.dumps({"platform": "ps4"}))
+                             }
+                            )
 
     # fetch and verify
     r = app.test_client().get('/api/v2/testsuites/1', headers=create_customer_headers(customer_id))
@@ -132,14 +135,13 @@ def test_list_specific(app, backend, customer_id):
 
 
 def test_delete(app, backend, customer_id):
-    backend.insert_testsuites([
-        {
-            "id": 5,
-            "name": "A test suite name",
-            "description": "A description",
-            "metadata": "{}"
-        }
-    ])
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "A test suite name",
+                                 "description": "A description",
+                                 "metadata": "{}"
+                             }
+                            )
 
     # fetch and verify
     r = app.test_client().delete('/api/v2/testsuites/5', headers=create_customer_headers(customer_id))

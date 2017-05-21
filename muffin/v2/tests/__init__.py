@@ -8,4 +8,4 @@ def get_json(response):  # pragma: no cover
 
 
 def create_customer_headers(customer_id):
-    return {'muffin-customer-id': customer_id}
+    return {'muffin-customer-id': customer_id if customer_id else ''}

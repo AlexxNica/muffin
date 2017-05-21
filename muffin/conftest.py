@@ -32,4 +32,4 @@ def backend(app):  # pylint:disable=W0621
 
 @pytest.fixture()
 def customer_id():
-    return ""
+    return None

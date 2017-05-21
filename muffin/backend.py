@@ -76,17 +76,36 @@ def init_tables(drop_tables=False):  # pragma: no cover
     db.create_all()
 
 
-def insert_testsuites(testsuite):
-    engine = _get_shard_engine(sid=None)  # get default shard
-    engine.execute(tables.testsuite.insert(), testsuite)
+def upsert_testsuite(entity_id, testsuite):
+    """
+    Upsert (insert/replace) the testsuite specified
+    """
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    # TODO: Do actual upsert
+    new_record = engine.execute(tables.testsuite.insert(), testsuite)
+    return new_record.inserted_primary_key[0]
 
 
-def insert_runs(runs_of_testsuites):
-    engine = _get_shard_engine(sid=None)  # get default shard
+def insert_testsuite_run(entity_id, testsuite_id, testsuite_run, started=None, ended=None):
+    """
+    insert a new run of a test suite, optionally specify the record for when it started and when it ended
+    """
+    # TODO: use test suite id?
+    del testsuite_id
 
-    engine.execute(tables.testsuite_run.insert(), [r[0] for r in runs_of_testsuites])
-    engine.execute(tables.testsuite_started.insert(), [r[1] for r in runs_of_testsuites if r[1]])
-    engine.execute(tables.testsuite_ended.insert(), [r[2] for r in runs_of_testsuites if r[2]])
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    new_run = engine.execute(tables.testsuite_run.insert(), testsuite_run)
+    if started:
+        engine.execute(tables.testsuite_started.insert(), started)
+    if ended:
+        engine.execute(tables.testsuite_ended.insert(), ended)
+    return new_run.inserted_primary_key[0]
 
 
 def insert_tags(tags, tag_mapping):
@@ -122,6 +141,19 @@ def get_testsuite(entity_id, testsuite_id, fields):
     t = s.where(tables.testsuite.c.id == testsuite_id)
     return engine.execute(t).fetchone()
 
+
+def get_testsuite_run(entity_id, testsuite_run_id, fields):
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    # TODO: what to do with the db_id
+    if fields:
+        s = select([tables.testsuite_run.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite_run])
+    t = s.where(tables.testsuite_run.c.id == testsuite_run_id)
+    return engine.execute(t).fetchone()
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard

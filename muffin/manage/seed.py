@@ -22,84 +22,71 @@ class SeedDatabase(Command):
 
         # backend.insert_projects()
 
-        backend.insert_testsuites([
-            {
-                "name": "TestSuite Name",
-                "description": "A cool description",
-                "metadata": "{}"
-            },
-            {
-                "name": "Another testsuite",
-                "description": "A boring description",
-                "metadata": str(json.dumps({"platform": "windows"}))
-            }
-        ])
+        customer_id = None
+        first_suite = backend.upsert_testsuite(customer_id,
+                                               {
+                                                   "name": "TestSuite Name",
+                                                   "description": "A cool description",
+                                                   "metadata": "{}"
+                                               })
+        second_suite = backend.upsert_testsuite(customer_id,
+                                                {
+                                                    "name": "Another testsuite",
+                                                    "description": "A boring description",
+                                                    "metadata": str(json.dumps({"platform": "windows"}))
+                                                }
+                                               )
 
-        backend.insert_runs(
-            [
-                # a completed succesful run
-                (
-                    {
-                        "id": 1,
-                        "testsuite_id": 1,
-                        "createdAt": datetime.datetime.now(),
-                        "metadata": str(json.dumps({"build_version_id": "1337"}))
-                    },
-                    {
-                        "testsuite_run_id": 1,
-                        "startedAt": datetime.datetime.now(),
-                    },
-                    {
-                        "testsuite_run_id": 1,
-                        "endedAt": datetime.datetime.now(),
-                        "result": 0  # succesful
-                    }
-                ),
-                # a failed finished run
-                (
-                    {
-                        "id": 2,
-                        "testsuite_id": 1,
-                        "createdAt": datetime.datetime.now(),
-                        "metadata": str(json.dumps({"build_version_id": "1338"}))
-                    },
-                    {
-                        "testsuite_run_id": 2,
-                        "startedAt": datetime.datetime.now(),
-                    },
-                    {
-                        "testsuite_run_id": 2,
-                        "endedAt": datetime.datetime.now(),
-                        "result": 1  # failed
-                    }
-                ),
-                # running run
-                (
-                    {
-                        "id": 3,
-                        "testsuite_id": 1,
-                        "createdAt": datetime.datetime.now(),
-                        "metadata": str(json.dumps({"build_version_id": "1338"}))
-                    },
-                    {
-                        "testsuite_run_id": 3,
-                        "startedAt": datetime.datetime.now(),
-                    },
-                    None
-                ),
-                # run that has yet to start
-                (
-                    {
-                        "id": 4,
-                        "testsuite_id": 1,
-                        "createdAt": datetime.datetime.now(),
-                        "metadata": str(json.dumps({"build_version_id": "1338"}))
-                    },
-                    None,
-                    None
-                )
-            ]
-        )
+        # a completed succesful run
+        backend.insert_testsuite_run(customer_id, first_suite,
+                                     {
+                                         "createdAt": datetime.datetime.now(),
+                                         "metadata": str(json.dumps({"build_version_id": "1337"}))
+                                     },
+                                     {
+                                         "startedAt": datetime.datetime.now(),
+                                     },
+                                     {
+                                         "endedAt": datetime.datetime.now(),
+                                         "result": 0  # succesful
+                                     }
+                                    )
+
+        # a failed finished run
+        backend.insert_testsuite_run(customer_id, first_suite,
+                                     {
+                                         "createdAt": datetime.datetime.now(),
+                                         "metadata": str(json.dumps({"build_version_id": "1338"}))
+                                     },
+                                     {
+                                         "startedAt": datetime.datetime.now(),
+                                     },
+                                     {
+                                         "endedAt": datetime.datetime.now(),
+                                         "result": 1  # failed
+                                     })
+
+       # running run
+        backend.insert_testsuite_run(customer_id, first_suite,
+                                     {
+                                         "createdAt": datetime.datetime.now(),
+                                         "metadata": str(json.dumps({"build_version_id": "1338"}))
+                                     },
+                                     {
+                                         "startedAt": datetime.datetime.now(),
+                                     },
+                                     None
+                                    )
+
+        # run that has yet to start
+        backend.insert_testsuite_run(customer_id, second_suite,
+                                     {
+                                         "createdAt": datetime.datetime.now(),
+                                         "metadata": str(json.dumps({"build_version_id": "1338"}))
+                                     },
+                                     None,
+                                     None
+                                    )
 
         backend.insert_tags(
             [{"tag_id": 1, "name": "Mantle", "metadata": "{}"}],

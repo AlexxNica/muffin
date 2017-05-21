@@ -23,6 +23,17 @@ class MuffinError(Exception):
         return d
 
 
+class MissingFieldsError(MuffinError):
+    def __init__(self, fields):
+        msg = "One or more required fields missing"
+        status_code = 400
+        payload = {
+            "message" : msg,
+            "statusCode": status_code,
+            "fields" : ','.join(fields)
+        }
+        super().__init__(msg, payload, status_code)
+
 @muffin_error.app_errorhandler(MuffinError)
 def handle_muffin_error(error):
     print("Error handler invoked")
