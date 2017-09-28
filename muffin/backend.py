@@ -142,7 +142,7 @@ def get_testsuite(entity_id, testsuite_id, fields):
     return engine.execute(t).fetchone()
 
 
-def get_testsuite_run(entity_id, testsuite_run_id, fields):
+def get_testsuite_run(entity_id, testsuite_run_id, fields=None):
     sid = get_shard_id(entity_id)
     # db_id = get_db_id(entity_id)
     engine = _get_shard_engine(sid)
@@ -154,6 +154,21 @@ def get_testsuite_run(entity_id, testsuite_run_id, fields):
         s = select([tables.testsuite_run])
     t = s.where(tables.testsuite_run.c.id == testsuite_run_id)
     return engine.execute(t).fetchone()
+
+
+def get_testsuite_runs(entity_id, fields=None):
+    sid = get_shard_id(entity_id)
+    # db_id = get_db_id(entity_id)
+    engine = _get_shard_engine(sid)
+
+    # TODO: what to do with the db_id
+    if fields:
+        s = select([tables.testsuite_run.c[f] for f in fields])
+    else:
+        s = select([tables.testsuite_run])
+    # TODO: paginated
+    return engine.execute(s).fetchall()
+
 
 # def insert_projects(projects):
 #     engine = _get_shard_engine(sid=None)  # get default shard
@@ -183,7 +198,7 @@ def get_shard_id(entity_id):
 
 def get_db_id(entity_id):
     if entity_id is None:
-        return None  # pragma: no cover 
+        return None  # pragma: no cover
     return entity_id & 0xffffffff
 
 

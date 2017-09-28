@@ -28,6 +28,11 @@ class CustomerIdFormatException(MuffinError):
         super().__init__("The muffin-customer-id field was not in a correct format")
 
 
+class InvalidDbToObjectMappingException(MuffinError):
+    def __init__(self, key, mapping, db_record):
+        super().__init__(f"Invalid mapping '{mapping}' to key '{key}' db value was: {db_record}", status_code=500)
+
+
 def get_common_params(request):
     fields = request.args.get('fields')
     if fields:
@@ -40,3 +45,39 @@ def get_common_params(request):
 
 def create_reference_to(name, endpoint_name, **values):
     return {'rel': name, 'url': flask.url_for(endpoint_name, **values)}
+
+
+def apply_mapping_to_db_fields(fields, mapping):
+    if not fields:
+        return None
+
+    db_fields = []
+    for f in fields:
+        x = mapping[f]
+        if isinstance(x, list):
+            db_fields.extend(x)
+        else:
+            db_fields.append(x)
+    return db_fields
+
+
+def map_db_record_to_dict(record, mapping, fields):
+    all_fields = fields is None
+    d = {}
+    for k, v in mapping.items():
+        if not all_fields and k not in fields:
+            continue
+
+        if callable(v):
+            d[k] = v(record)
+        elif v == "":
+
+            if k not in record:
+                continue
+            rv = record[k]
+
+            # forward the record value
+            d[k] = rv
+        else:
+            raise InvalidDbToObjectMappingException(k, v, rv)
+    return d

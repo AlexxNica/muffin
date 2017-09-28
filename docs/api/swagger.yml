@@ -32,10 +32,10 @@ paths:
               format: double
           examples:
             application/json: {
-              testsuites: [
+              testsuitesruns: [
                 {
                   "id": 5,
-                  "idStr": "5",
+                  "id_str": "5",
                   "createdAt": "2015-02-25T16:14:37.377",
                   "startedAt": "2015-02-25T16:14:38.427",
                   "state": "Running",
@@ -104,7 +104,7 @@ paths:
           examples:
             application/json: {
               "id" : 1,
-              "idStr" : "1"
+              "id_str" : "1"
             }
         default:
           description: Unexpected error
@@ -376,7 +376,7 @@ definitions:
     type: object
     required:
     - id
-    - idStr
+    - id_str
     - createdAt
     - state
     - metadata
@@ -386,7 +386,7 @@ definitions:
         type: integer
         format: int64
         description: Unique id of this run of a test suite as an integer, use this if your parser can handle 64 bit values
-      idStr:
+      id_str:
         type: string
         description: Unique id of this run of a test suite as a string use this if you have a sucky parser
       createdAt:
@@ -420,7 +420,7 @@ definitions:
     type: object
     required:
     - id
-    - idStr
+    - id_str
     - name
     - description
     - metadata
@@ -430,7 +430,7 @@ definitions:
         type: integer
         format: int64
         description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
-      idStr:
+      id_str:
         type: string
         description: Unique id of this particular test suite as a string use this if you have a sucky parser
       name:
@@ -490,7 +490,7 @@ definitions:
         type: integer
         format: int64
         description: Unique id of this particular test suite as an integer, use this if your parser can handle 64 bit values
-      idStr:
+      id_str:
         type: string
         description: Unique id of this particular test suite as a string use this if you have a sucky parser
   Tags:
