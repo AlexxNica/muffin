@@ -5,6 +5,7 @@ import flask
 import muffin.backend as backend
 from muffin.v2.request_utils import get_customer_id
 from muffin.muffin_error import MissingFieldsError
+import dateutil.parser
 
 testsuite_runs_blueprint = flask.Blueprint("testsuite_runs", __name__)
 
@@ -55,11 +56,11 @@ def post_testsuite_runs():
     ended = None
     if "startedAt" in content:
         started = {
-            "startedAt" : content["startedAt"]
+            "startedAt" : dateutil.parser.parse(content["startedAt"])
         }
     if "endedAt" in content:
         ended = {
-            "endedAt" : content["endedAt"],
+            "endedAt" : dateutil.parser.parse(content["endedAt"]),
             "result": content["result"]
         }
 

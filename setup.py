@@ -29,5 +29,6 @@ setup(
         'Flask-Script',
         'fake-factory',
         'jsonpatch',
-        'Flask-SQLAlchemy']
+        'Flask-SQLAlchemy',
+        'python-dateutil']
     )
