@@ -50,7 +50,6 @@ def list_testsuite_runs():
 
 @testsuite_runs_blueprint.route('/testsuiteruns/<int:run_id>', methods=['GET'])
 def list_testsuite_run(run_id):
-
     customer_id = get_customer_id(flask.request)
     (fields, _) = get_common_params(flask.request)
     db_fields = to_db_columns(fields)

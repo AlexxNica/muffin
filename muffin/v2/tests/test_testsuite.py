@@ -131,6 +131,40 @@ def test_list_specific(app, backend, customer_id):
     # TODO : Verify tags
 
 
+def test_list_specific_fieldfilter(app, backend, customer_id):
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "A test suite name",
+                                 "description": "A description",
+                                 "metadata": "{}"
+                             })
+    backend.upsert_testsuite(customer_id,
+                             {
+                                 "name": "2nd testsuite",
+                                 "description": "Foo bar",
+                                 "metadata": str(json.dumps({"platform": "ps4"}))
+                             })
+
+    # filter to the id and foo fields, the foo field doesn't exist and should be ignored
+    q = {"fields": ["id", "foo"]}
+    r = app.test_client().get('/api/v2/testsuites/1', headers=create_customer_headers(customer_id), query_string=q)
+
+    assert r.status_code == 200
+
+    assert 'X-ElapsedTime' in r.headers
+
+    ts = get_json(r)
+
+    assert 'id' in ts
+    assert ts['id'] == 1
+
+    assert 'id_str' not in ts
+    assert 'name' not in ts
+    assert 'description' not in ts
+    assert 'metadata' not in ts
+    assert 'references' not in ts
+
+
 def test_delete(app, backend, customer_id):
     backend.upsert_testsuite(customer_id,
                              {

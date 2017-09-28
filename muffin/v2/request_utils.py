@@ -28,7 +28,7 @@ class CustomerIdFormatException(MuffinError):
         super().__init__("The muffin-customer-id field was not in a correct format")
 
 
-class InvalidDbToObjectMappingException(MuffinError):
+class InvalidDbToObjectMappingException(MuffinError):  # pragma: no cover only thrown when code is incorrect
     def __init__(self, key, mapping, db_record):
         super().__init__(f"Invalid mapping '{mapping}' to key '{key}' db value was: {db_record}", status_code=500)
 
@@ -78,6 +78,6 @@ def map_db_record_to_dict(record, mapping, fields):
 
             # forward the record value
             d[k] = rv
-        else:
+        else:  # pragma: no cover
             raise InvalidDbToObjectMappingException(k, v, rv)
     return d
