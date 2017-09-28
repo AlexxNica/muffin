@@ -34,8 +34,7 @@ class SeedDatabase(Command):
                                                     "name": "Another testsuite",
                                                     "description": "A boring description",
                                                     "metadata": str(json.dumps({"platform": "windows"}))
-                                                }
-                                               )
+                                                })
 
         # a completed succesful run
         backend.insert_testsuite_run(customer_id, first_suite,
@@ -49,8 +48,7 @@ class SeedDatabase(Command):
                                      {
                                          "endedAt": datetime.datetime.now(),
                                          "result": 0  # succesful
-                                     }
-                                    )
+                                     })
 
         # a failed finished run
         backend.insert_testsuite_run(customer_id, first_suite,
@@ -66,7 +64,7 @@ class SeedDatabase(Command):
                                          "result": 1  # failed
                                      })
 
-       # running run
+        # running run
         backend.insert_testsuite_run(customer_id, first_suite,
                                      {
                                          "createdAt": datetime.datetime.now(),
@@ -75,8 +73,7 @@ class SeedDatabase(Command):
                                      {
                                          "startedAt": datetime.datetime.now(),
                                      },
-                                     None
-                                    )
+                                     None)
 
         # run that has yet to start
         backend.insert_testsuite_run(customer_id, second_suite,
@@ -85,8 +82,7 @@ class SeedDatabase(Command):
                                          "metadata": str(json.dumps({"build_version_id": "1338"}))
                                      },
                                      None,
-                                     None
-                                    )
+                                     None)
 
         backend.insert_tags(
             [{"tag_id": 1, "name": "Mantle", "metadata": "{}"}],

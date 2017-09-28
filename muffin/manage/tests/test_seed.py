@@ -2,9 +2,8 @@
 
 
 import flask_script
-
-import muffin.factories
 import muffin.manage.seed as mg
+
 
 def test_seed(app):
     """

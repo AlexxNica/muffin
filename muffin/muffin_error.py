@@ -28,11 +28,12 @@ class MissingFieldsError(MuffinError):
         msg = "One or more required fields missing"
         status_code = 400
         payload = {
-            "message" : msg,
+            "message": msg,
             "statusCode": status_code,
-            "fields" : ','.join(fields)
+            "fields": ','.join(fields)
         }
         super().__init__(msg, payload, status_code)
+
 
 @muffin_error.app_errorhandler(MuffinError)
 def handle_muffin_error(error):
