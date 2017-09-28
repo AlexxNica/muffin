@@ -183,7 +183,7 @@ def get_shard_id(entity_id):
 
 def get_db_id(entity_id):
     if entity_id is None:
-        return None
+        return None  # pragma: no cover 
     return entity_id & 0xffffffff
 
 

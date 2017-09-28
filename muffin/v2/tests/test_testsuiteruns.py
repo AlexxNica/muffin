@@ -109,7 +109,7 @@ def test_post_testsuiterun_missing_field(app, customer_id):
 
     run = {
         # name is missing
-        "description": "A description",
+        # description is also missing
         "metadata": "{}",
     }
 
@@ -124,4 +124,56 @@ def test_post_testsuiterun_missing_field(app, customer_id):
     assert 'fields' in data
     f = data["fields"]
     assert "name" in f
+    assert 'description' in f
 
+
+def test_post_testsuiterun_missing_field_result(app, customer_id):
+    """
+    Verifies that the post endpoint correctly reports which fields are missing for partial queries
+    """
+
+    run = {
+        "name": "A test suite name",
+        "description": "A description",
+        "metadata": "{}",
+        "endedAt": str(datetime.now())
+        # result is missing
+    }
+
+    r = app.test_client().post('/api/v2/testsuiteruns', data=json.dumps(run),
+                               headers=create_customer_headers(customer_id))
+
+    data = get_json(r)
+    assert r.status_code == 400
+    assert 'X-ElapsedTime' in r.headers
+
+    assert 'message' in data
+    assert 'fields' in data
+    f = data["fields"]
+    assert "result" in f
+
+
+def test_post_testsuiterun_missing_field_endedAt(app, customer_id):
+    """
+    Verifies that the post endpoint correctly reports which fields are missing for partial queries
+    """
+
+    run = {
+        "name": "A test suite name",
+        "description": "A description",
+        "metadata": "{}",
+        "result" : "failure"
+        # endedAt is missing
+   }
+
+    r = app.test_client().post('/api/v2/testsuiteruns', data=json.dumps(run),
+                               headers=create_customer_headers(customer_id))
+
+    data = get_json(r)
+    assert r.status_code == 400
+    assert 'X-ElapsedTime' in r.headers
+
+    assert 'message' in data
+    assert 'fields' in data
+    f = data["fields"]
+    assert "endedAt" in f
